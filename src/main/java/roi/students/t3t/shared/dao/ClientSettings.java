@@ -1,7 +1,7 @@
 package roi.students.t3t.shared.dao;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ClientSettings {
-	public List<Site> getSiteList();
+	public Set<Site> getSiteList();
 }
