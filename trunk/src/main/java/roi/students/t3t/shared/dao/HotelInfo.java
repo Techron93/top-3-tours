@@ -4,7 +4,7 @@ public interface HotelInfo {
 	
 	public String getURL();
 	public int getPrice();
-	public int getName();
+	public String getName();
 	public int getStars();
 
 }
