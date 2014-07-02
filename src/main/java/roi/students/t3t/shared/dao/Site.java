@@ -1,6 +1,8 @@
 package roi.students.t3t.shared.dao;
 
-//или это должен быть не enum?
 public enum Site {
-	teztour
+	teztour {
+		public String url(){return "http://www.tez-tour.com/";}
+		public String siteName(){return "TEZ tour";}
+	}
 }
