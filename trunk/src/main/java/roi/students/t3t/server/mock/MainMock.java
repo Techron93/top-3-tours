@@ -3,11 +3,11 @@ package roi.students.t3t.server.mock;
 import java.util.Date;
 import java.util.List;
 
+import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.ClientSettings;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.Request;
 import roi.students.t3t.shared.dao.ServerResponse;
-import roi.students.t3t.shared.dao.Site;
 import roi.students.t3t.shared.dao.impl.ClientSettingsImpl;
 import roi.students.t3t.shared.dao.impl.HotelRequestImpl;
 import roi.students.t3t.shared.dao.impl.RequestImpl;

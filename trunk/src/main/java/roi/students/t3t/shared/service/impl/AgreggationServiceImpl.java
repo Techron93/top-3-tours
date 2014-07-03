@@ -8,11 +8,11 @@ import java.util.Set;
 
 import roi.students.t3t.server.mock.MockITourParser;
 import roi.students.t3t.server.mock.MockTezTourParser;
+import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.Request;
 import roi.students.t3t.shared.dao.ServerResponse;
-import roi.students.t3t.shared.dao.Site;
 import roi.students.t3t.shared.dao.impl.ServerResponseImpl;
 import roi.students.t3t.shared.service.AgreggationService;
 

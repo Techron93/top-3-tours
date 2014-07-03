@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import roi.students.t3t.server.SiteParser;
+import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
-import roi.students.t3t.shared.dao.Site;
 import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
 
 public class MockTezTourParser implements SiteParser {

@@ -2,8 +2,8 @@ package roi.students.t3t.shared.dao.impl;
 
 import java.util.Date;
 
+import roi.students.t3t.shared.TypeFood;
 import roi.students.t3t.shared.dao.HotelRequest;
-import roi.students.t3t.shared.dao.TypeFood;
 
 public class HotelRequestImpl implements HotelRequest {
 	

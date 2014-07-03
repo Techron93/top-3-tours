@@ -2,6 +2,8 @@ package roi.students.t3t.shared.dao;
 
 import java.util.Date;
 
+import roi.students.t3t.shared.TypeFood;
+
 public interface HotelRequest {
 	
 	public Date getStartDate();
