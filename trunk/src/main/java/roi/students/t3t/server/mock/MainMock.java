@@ -1,5 +1,7 @@
 package roi.students.t3t.server.mock;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import roi.students.t3t.shared.service.impl.AgreggationServiceImpl;
 //я не использовал пока здесь Mock, но показать базовую логику можно
 public class MainMock {
 	public static void main(String[] args) {
-		HotelRequestImpl testReq = new HotelRequestImpl(new Date(), new Date(2014,10,20), 2, 4,"Egypt");
+		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.now(), LocalDate.of(2015, 8, 10), 2, 4,"Egypt");
 		//TODO: ограничить setter'ы, например, нельзя отрицательные числа
 		testReq.setMinPrice(10000);
 		testReq.setMaxPrice(30000);
@@ -40,5 +42,8 @@ public class MainMock {
 			System.out.println(elem.getName());
 			System.out.println();
 		}
+		
+		LocalDate localDate = LocalDate.of(2014, 8, 15);
+		System.out.println(localDate.toString());
 	}
 }

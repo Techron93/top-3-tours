@@ -1,5 +1,7 @@
+
 package roi.students.t3t.shared.dao.impl;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import roi.students.t3t.shared.TypeFood;
@@ -7,8 +9,8 @@ import roi.students.t3t.shared.dao.HotelRequest;
 
 public class HotelRequestImpl implements HotelRequest {
 	
-	private Date startDate;
-	private Date finishDate;
+	private LocalDate startDate;
+	private LocalDate finishDate;
 	private String country;
 	private int minStars;
 	private int maxStars;
@@ -19,12 +21,12 @@ public class HotelRequestImpl implements HotelRequest {
 	private int peopleCount = 0; //TODO: сделать enum на основе предложений сайтов
 	
 	public HotelRequestImpl() {
-		startDate = new Date(); //текущая дата
-		finishDate = new Date();
+		startDate = LocalDate.now(); //текущая дата
+		finishDate = LocalDate.now();
 		country = null;
 	}
 	
-	public HotelRequestImpl(Date startDate, Date finishDate, int minStars, int maxStars, String country){
+	public HotelRequestImpl(LocalDate startDate, LocalDate finishDate, int minStars, int maxStars, String country){
 		setStartDate(startDate);
 		setFinishDate(finishDate);
 		setMinStars(minStars);
@@ -32,7 +34,7 @@ public class HotelRequestImpl implements HotelRequest {
 		setCountry(country);
 	}
 	
-	public HotelRequestImpl(Date startDate, Date finishDate, String country, int minStars, int maxStars, TypeFood typeFood, 
+	public HotelRequestImpl(LocalDate startDate, LocalDate finishDate, String country, int minStars, int maxStars, TypeFood typeFood, 
 			int minPrice, int maxPrice, int peopleCount){
 		
 		setStartDate(startDate);
@@ -46,16 +48,16 @@ public class HotelRequestImpl implements HotelRequest {
 		setPeopleCount(peopleCount);
 	}
 	
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getFinishDate() {
+	public LocalDate getFinishDate() {
 		return finishDate;
 	}
-	public void setFinishDate(Date finishDate) {
+	public void setFinishDate(LocalDate finishDate) {
 		this.finishDate = finishDate;
 	}
 	public String getCountry() {
