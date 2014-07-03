@@ -1,4 +1,4 @@
-package roi.students.t3t.shared.dao;
+package roi.students.t3t.shared;
 
 public enum TypeFood
 {
