@@ -24,11 +24,12 @@ public class HotelRequestImpl implements HotelRequest {
 		country = null;
 	}
 	
-	public HotelRequestImpl(Date startDate, Date finishDate, int minStars, int maxStars){
+	public HotelRequestImpl(Date startDate, Date finishDate, int minStars, int maxStars, String country){
 		setStartDate(startDate);
 		setFinishDate(finishDate);
 		setMinStars(minStars);
 		setMaxStars(maxStars);
+		setCountry(country);
 	}
 	
 	public HotelRequestImpl(Date startDate, Date finishDate, String country, int minStars, int maxStars, TypeFood typeFood, 
