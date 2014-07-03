@@ -1,5 +1,6 @@
 package roi.students.t3t.server.mock;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MockTezTourParser implements SiteParser {
 		for(int i=0; i < 1000; i++){
 			//черт, можно сделать умнее, хотя это просто заглушка
 			//TODO: корректная работа с датами
-			Date siteDate = new Date(randInt(2014,2015), randInt(1,12), randInt(1,28));
+			LocalDate siteDate = LocalDate.of(randInt(2014,2015), randInt(1,12), randInt(1,28));
 			String  siteCountry = countries[randInt(0,4)];
 			int sitePrice = randInt(1,100000);
 			int siteStars = randInt(1,5);
@@ -47,7 +48,7 @@ public class MockTezTourParser implements SiteParser {
 					request.getMaxPrice() >= sitePrice && request.getMinStars() <= siteStars &&
 					request.getMaxStars() >= siteStars){
 				//TODO: enum не пашет как хотелось бы, надо обсудить
-				resultList.add(new HotelInfoImpl(siteCountry+" "+siteDate.toString()+" year " + siteDate.getYear(),
+				resultList.add(new HotelInfoImpl(siteCountry+" "+siteDate.toString(),
 						sitePrice,name,siteStars));
 			}
 		}
