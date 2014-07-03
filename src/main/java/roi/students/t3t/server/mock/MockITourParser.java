@@ -2,7 +2,6 @@ package roi.students.t3t.server.mock;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import roi.students.t3t.server.SiteParser;
@@ -10,6 +9,7 @@ import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
+import roi.students.t3t.shared.service.impl.AgreggationServiceSuit;
 
 public class MockITourParser implements SiteParser {
 
@@ -50,7 +50,7 @@ public class MockITourParser implements SiteParser {
 						sitePrice,name,siteStars));
 			}
 		}
-		return resultList;
+		return AgreggationServiceSuit.getThreeBest(resultList);
 	}
 
 	public Site getSite() {
