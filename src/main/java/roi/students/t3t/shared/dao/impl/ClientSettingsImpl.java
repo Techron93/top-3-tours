@@ -3,8 +3,8 @@ package roi.students.t3t.shared.dao.impl;
 import java.util.Set;
 import java.util.TreeSet;
 
+import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.ClientSettings;
-import roi.students.t3t.shared.dao.Site;
 
 public class ClientSettingsImpl implements ClientSettings {
 	
