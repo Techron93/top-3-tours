@@ -50,6 +50,11 @@
 			<classifier>sources</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -134,7 +139,7 @@
 										<execute />
 									</action>
 								</pluginExecution>
-								
+
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.codehaus.mojo</groupId>
@@ -151,13 +156,13 @@
 										<execute />
 									</action>
 								</pluginExecution>
-							
+
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
 
-			
+
 			</plugins>
 		</pluginManagement>
 	</build>
