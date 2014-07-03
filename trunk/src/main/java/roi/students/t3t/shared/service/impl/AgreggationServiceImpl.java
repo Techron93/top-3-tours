@@ -1,8 +1,6 @@
 package roi.students.t3t.shared.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +16,6 @@ import roi.students.t3t.shared.service.AgreggationService;
 
 public class AgreggationServiceImpl implements AgreggationService {
 	
-	public static int siteNum = 3;
 	
 	public ServerResponse getResult(Request request) {
 		List<HotelInfo> parserResults = new ArrayList<HotelInfo>();
@@ -29,31 +26,17 @@ public class AgreggationServiceImpl implements AgreggationService {
 			case itour:
 				MockITourParser itourParser = new MockITourParser();
 				parserResults.addAll(itourParser.getList(hotelRequest));
+				break;
 			case teztour:
 				MockTezTourParser tezTourParser = new MockTezTourParser();
 				parserResults.addAll(tezTourParser.getList(hotelRequest));
+				break;
 			default:
 				break;
 			}
 		}
 		
-		return new ServerResponseImpl(doSort(parserResults),request);
-	}
-	
-	private List<HotelInfo> doSort(List<HotelInfo> list){
-		//Сортировка по цене
-		//TODO: обсудить логику
-		Collections.sort(list, new Comparator<HotelInfo>() {
-			  public int compare(HotelInfo o1, HotelInfo o2) {
-			    return Integer.compare(o1.getPrice(), o2.getPrice());
-			  }
-			});
-		List<HotelInfo> result = new ArrayList<HotelInfo>();
-		for(int i =0; i < list.size() && i < siteNum; i++){
-			result.add(list.get(i));
-		}
-
-		return result;
+		return new ServerResponseImpl(AgreggationServiceSuit.getThreeBest(parserResults),request);
 	}
 
 }

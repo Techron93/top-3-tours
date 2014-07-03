@@ -10,6 +10,7 @@ import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
+import roi.students.t3t.shared.service.impl.AgreggationServiceSuit;
 
 public class MockTezTourParser implements SiteParser {
 	private Site site;
@@ -47,12 +48,11 @@ public class MockTezTourParser implements SiteParser {
 					request.getCountry() == siteCountry && request.getMinPrice() <= sitePrice && 
 					request.getMaxPrice() >= sitePrice && request.getMinStars() <= siteStars &&
 					request.getMaxStars() >= siteStars){
-				//TODO: enum не пашет как хотелось бы, надо обсудить
 				resultList.add(new HotelInfoImpl(siteCountry+" "+siteDate.toString(),
 						sitePrice,name,siteStars));
 			}
 		}
-		return resultList;
+		return AgreggationServiceSuit.getThreeBest(resultList);
 	}
 
 	public Site getSite() {
