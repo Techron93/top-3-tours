@@ -59,7 +59,7 @@ public class MockTezTourParser implements SiteParser {
 		return site;
 	}
 
-	public String BuildUrl(HotelRequest request) {
+	public String buildUrl(HotelRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

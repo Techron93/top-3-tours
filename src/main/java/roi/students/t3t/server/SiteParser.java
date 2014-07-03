@@ -8,5 +8,5 @@ import roi.students.t3t.shared.dao.HotelRequest;
 
 public interface SiteParser {
 	public List<HotelInfo> getList(HotelRequest request);
-	public String BuildUrl(HotelRequest request);
+	public String buildUrl(HotelRequest request);
 }
