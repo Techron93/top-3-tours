@@ -57,7 +57,7 @@ public class MockITourParser implements SiteParser {
 		return site;
 	}
 
-	public String BuildUrl(HotelRequest request) {
+	public String buildUrl(HotelRequest request) {
 		return null;
 	}
 
