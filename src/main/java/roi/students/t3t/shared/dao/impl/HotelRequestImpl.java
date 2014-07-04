@@ -2,8 +2,8 @@
 package roi.students.t3t.shared.dao.impl;
 
 import java.time.LocalDate;
-import java.util.Date;
 
+import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.TypeFood;
 import roi.students.t3t.shared.dao.HotelRequest;
 
@@ -11,7 +11,7 @@ public class HotelRequestImpl implements HotelRequest {
 	
 	private LocalDate startDate;
 	private LocalDate finishDate;
-	private String country;
+	private Country country;
 	private int minStars;
 	private int maxStars;
 	private TypeFood typeFood;
@@ -26,7 +26,7 @@ public class HotelRequestImpl implements HotelRequest {
 		country = null;
 	}
 	
-	public HotelRequestImpl(LocalDate startDate, LocalDate finishDate, int minStars, int maxStars, String country){
+	public HotelRequestImpl(LocalDate startDate, LocalDate finishDate, int minStars, int maxStars, Country country){
 		setStartDate(startDate);
 		setFinishDate(finishDate);
 		setMinStars(minStars);
@@ -34,7 +34,7 @@ public class HotelRequestImpl implements HotelRequest {
 		setCountry(country);
 	}
 	
-	public HotelRequestImpl(LocalDate startDate, LocalDate finishDate, String country, int minStars, int maxStars, TypeFood typeFood, 
+	public HotelRequestImpl(LocalDate startDate, LocalDate finishDate, Country country, int minStars, int maxStars, TypeFood typeFood, 
 			int minPrice, int maxPrice, int peopleCount){
 		
 		setStartDate(startDate);
@@ -60,10 +60,10 @@ public class HotelRequestImpl implements HotelRequest {
 	public void setFinishDate(LocalDate finishDate) {
 		this.finishDate = finishDate;
 	}
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 	public int getMinStars() {

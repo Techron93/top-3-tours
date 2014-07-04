@@ -3,9 +3,11 @@ package roi.students.t3t.server.mock;
 import java.time.LocalDate;
 import java.util.List;
 
+import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.ClientSettings;
 import roi.students.t3t.shared.dao.HotelInfo;
+import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.Request;
 import roi.students.t3t.shared.dao.ServerResponse;
 import roi.students.t3t.shared.dao.impl.ClientSettingsImpl;
@@ -17,7 +19,7 @@ import roi.students.t3t.shared.service.impl.AgreggationServiceImpl;
 //я не использовал пока здесь Mock, но показать базовую логику можно
 public class MainMock {
 	public static void main(String[] args) {
-		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.now(), LocalDate.of(2015, 8, 10), 2, 4,"Egypt");
+		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.now(), LocalDate.of(2015, 8, 10), 2, 4,Country.Egypt);
 		//TODO: ограничить setter'ы, например, нельзя отрицательные числа
 		testReq.setMinPrice(10000);
 		testReq.setMaxPrice(30000);
@@ -43,5 +45,13 @@ public class MainMock {
 		
 		LocalDate localDate = LocalDate.of(2014, 8, 15);
 		System.out.println(localDate.toString());
+		
 	}
+	
+	public String buildUrl(HotelRequest request){
+		
+		
+		return null;
+	}
+
 }
