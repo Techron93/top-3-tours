@@ -1,8 +1,6 @@
 package roi.students.t3t.shared.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import roi.students.t3t.shared.dao.HotelInfo;
