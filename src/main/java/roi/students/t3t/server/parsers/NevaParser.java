@@ -2,6 +2,8 @@ package roi.students.t3t.server.parsers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class NevaParser implements SiteParser {
 
 		List<HotelInfo> result = new ArrayList<HotelInfo>();
 
-		String url = "http://www.nevatravel.ru/tours/search/spb/gre_-_-_-_-/1/15/16.06.2014/23.06.2014/2/0/-/-/-/0/29000/-/-/-/-/-/search/";
+		String url = buildUrl(request);
 		try {
 			HtmlPage page = webClient.getPage(url);
 			// wait for javascript to complete
@@ -70,8 +72,46 @@ public class NevaParser implements SiteParser {
 	}
 
 	public String buildUrl(HotelRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		String startDate = getDateForUrl(request.getStartDate());
+		long period = ChronoUnit.DAYS.between(request.getStartDate(), request.getFinishDate());
+		String starsRange;
+		if(request.getMinStars() == request.getMaxStars())
+			starsRange = Integer.toString(request.getMinStars());
+		else{
+			int min = request.getMinStars();
+			starsRange = Integer.toString(min);
+			for(int i = min+1; i <= request.getMaxStars(); ++i){
+				starsRange+="-"+Integer.toString(i);
+			}
+		}
+		
+		String url = 
+	    "http://www.nevatravel.ru/tours/search/spb/"+
+		request.getCountry().nevatravel+
+		"_-_-_-_-/"+
+		Long.toString(period)+"/"+
+		Long.toString(period)+
+		"/"+startDate+"/"+startDate+"/"+
+		request.getPeopleCount()+"/0/-/-/"+starsRange+"/"+
+		request.getMinPrice()+"/"+request.getMaxPrice()+"/-/-/-/-/-/search";
+		
+		return url;
+	}
+	
+	public String getDateForUrl(LocalDate date){
+		int day = date.getDayOfMonth();
+		String day_str;
+		if(day < 10)
+			day_str = "0"+day;
+		else
+			day_str = Integer.toString(day);
+		int month = date.getMonthValue();
+		String month_str;
+		if(month < 10)
+			month_str = "0"+month;
+		else
+			month_str = Integer.toString(month);
+		return day_str+"."+month_str+"."+date.getYear();
 	}
 
 }

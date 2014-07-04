@@ -9,6 +9,13 @@ public class HotelInfoImpl implements HotelInfo{
 	private String name;
 	private int stars;
 	
+	
+	@Override
+	public String toString() {
+		return "HotelInfoImpl [url=" + url + ", price=" + price + ", name="
+				+ name + ", stars=" + stars + "]";
+	}
+
 	public HotelInfoImpl(){
 		url = null;
 		price = 0;
