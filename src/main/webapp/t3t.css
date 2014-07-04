@@ -1,7 +1,5 @@
 /** Add css rules here for your application. */
 
-
-/** Example rules used by the template application (remove for your app) */
 h1 {
   font-size: 2em;
   font-weight: bold;
@@ -10,12 +8,26 @@ h1 {
   text-align: center;
 }
 
+.options_panel, .results_panel {
+	height: 500px;
+	padding: 5px;
+}
+
+.options_panel {
+	width: 300px;
+	background-color: #87CEEB;
+}
+
+.results_panel {
+	width: 500px;
+	background-color: #FFE4B5;
+}
+
 .sendButton {
   display: block;
   font-size: 16pt;
 }
 
-/** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
   width: 400px;
 }

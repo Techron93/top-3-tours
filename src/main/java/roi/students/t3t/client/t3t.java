@@ -42,14 +42,18 @@ public class t3t implements EntryPoint {
   public void onModuleLoad() {
 	  
 	  final OptionsPanel options_panel = new OptionsPanel();
-	  final ResultsPanel results_panel = new ResultsPanel();
-	  
 	  
 	  RootPanel.get("options_panel").add(options_panel);
-	  RootPanel.get("results_panel").add(results_panel);
-	  
 	  options_panel.addStyleName("options_panel");
+	  
+	  VerticalPanel results_panel = new VerticalPanel();
+	  RootPanel.get("results_panel").add(results_panel);
 	  results_panel.addStyleName("results_panel");
+	  
+	  final Button testButton = new Button( messages.testButton() );
+	  RootPanel.get("test_button").add(testButton);
+	  testButton.addStyleName("test_button");
+	  
 	  
 //    final Button sendButton = new Button( messages.sendButton() );
 //    final TextBox nameField = new TextBox();
