@@ -1,6 +1,8 @@
 package roi.students.t3t.server.mock;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import roi.students.t3t.shared.Country;
@@ -19,10 +21,13 @@ import roi.students.t3t.shared.service.impl.AgreggationServiceImpl;
 //я не использовал пока здесь Mock, но показать базовую логику можно
 public class MainMock {
 	public static void main(String[] args) {
-		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.now(), LocalDate.of(2015, 8, 10), 2, 4,Country.Egypt);
+		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.of(2014, 7, 11), LocalDate.of(2014, 7, 19), 2, 4,Country.Bulgaria);
+		testReq.setMinStars(3);
+		testReq.setMaxStars(4);
+		testReq.setPeopleCount(2);
 		//TODO: ограничить setter'ы, например, нельзя отрицательные числа
 		testReq.setMinPrice(10000);
-		testReq.setMaxPrice(30000);
+		testReq.setMaxPrice(60000);
 		
 		//client make request
 		ClientSettings clientSettings = new ClientSettingsImpl();
@@ -43,15 +48,53 @@ public class MainMock {
 			System.out.println();
 		}
 		
-		LocalDate localDate = LocalDate.of(2014, 8, 15);
-		System.out.println(localDate.toString());
+		LocalDate localDate = LocalDate.of(2014,8,15);
+		System.out.println(buildUrl(testReq));
 		
 	}
 	
-	public String buildUrl(HotelRequest request){
+	public static String buildUrl(HotelRequest request){
+		String startDate = getDateForUrl(request.getStartDate());
+		long period = ChronoUnit.DAYS.between(request.getStartDate(), request.getFinishDate());
+		String starsRange;
+		if(request.getMinStars() == request.getMaxStars())
+			starsRange = Integer.toString(request.getMinStars());
+		else{
+			int min = request.getMinStars();
+			starsRange = Integer.toString(min);
+			for(int i = min+1; i <= request.getMaxStars(); ++i){
+				starsRange+="-"+Integer.toString(i);
+			}
+		}
 		
+		String url = 
+	    "http://www.nevatravel.ru/tours/search/spb/"+
+		request.getCountry().nevatravel+
+		"_-_-_-_-/"+
+		Long.toString(period)+"/"+
+		Long.toString(period)+
+		"/"+startDate+"/"+startDate+"/"+
+		request.getPeopleCount()+"/0/-/-/"+starsRange+"/"+
+		request.getMinPrice()+"/"+request.getMaxPrice()+"/-/-/-/-/-/search";
 		
-		return null;
+		return url;
 	}
+	
+	public static String getDateForUrl(LocalDate date){
+		int day = date.getDayOfMonth();
+		String day_str;
+		if(day < 10)
+			day_str = "0"+day;
+		else
+			day_str = Integer.toString(day);
+		int month = date.getMonthValue();
+		String month_str;
+		if(month < 10)
+			month_str = "0"+month;
+		else
+			month_str = Integer.toString(month);
+		return day_str+"."+month_str+"."+date.getYear();
+	}
+	
 
 }
