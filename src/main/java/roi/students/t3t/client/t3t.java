@@ -1,6 +1,15 @@
 package roi.students.t3t.client;
 
-import roi.students.t3t.shared.FieldVerifier;
+import java.time.LocalDate;
+
+import roi.students.t3t.shared.Country;
+import roi.students.t3t.shared.Site;
+import roi.students.t3t.shared.dao.ClientSettings;
+import roi.students.t3t.shared.dao.Request;
+import roi.students.t3t.shared.dao.impl.ClientSettingsImpl;
+import roi.students.t3t.shared.dao.impl.HotelRequestImpl;
+import roi.students.t3t.shared.dao.impl.RequestImpl;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,13 +17,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -29,10 +33,7 @@ public class t3t implements EntryPoint {
       + "attempting to contact the server. Please check your network "
       + "connection and try again.";
 
-  /**
-   * Create a remote service proxy to talk to the server-side Greeting service.
-   */
-  private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+  private final ServerRequestAsync requestService = GWT.create(ServerRequestAsync.class);
 
   private final Messages messages = GWT.create(Messages.class);
 
@@ -55,6 +56,39 @@ public class t3t implements EntryPoint {
 	  testButton.addStyleName("test_button");
 	  
 	  
+	  
+  }
+  
+  public class SearchButtonHandler implements KeyUpHandler, ClickHandler {
+
+	@Override
+	public void onClick(ClickEvent event) {
+//		Request request = options_panel.getUserInput();
+//		sendRequest(request);
+		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.of(2014, 7, 11), LocalDate.of(2014, 7, 19), 2, 4,Country.Bulgaria);
+		testReq.setMinStars(3);
+		testReq.setMaxStars(4);
+		testReq.setPeopleCount(2);
+		//TODO: ограничить setter'ы, например, нельзя отрицательные числа
+		testReq.setMinPrice(10000);
+		testReq.setMaxPrice(60000);
+		
+		//client make request
+		ClientSettings clientSettings = new ClientSettingsImpl();
+		clientSettings.addSite(Site.teztour);
+		clientSettings.addSite(Site.itour);
+		Request request = new RequestImpl(testReq, clientSettings);
+	}
+
+	@Override
+	public void onKeyUp(KeyUpEvent event) {
+		if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+//			Request request = options_panel.getUserInput();
+//			sendRequest(request);
+		}
+	}
+	  
+  }
 //    final Button sendButton = new Button( messages.sendButton() );
 //    final TextBox nameField = new TextBox();
 //    nameField.setText( messages.nameField() );
@@ -160,5 +194,5 @@ public class t3t implements EntryPoint {
 //    MyHandler handler = new MyHandler();
 //    sendButton.addClickHandler(handler);
 //    nameField.addKeyUpHandler(handler);
-  }
+//  }
 }
