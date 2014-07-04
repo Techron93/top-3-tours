@@ -7,39 +7,86 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		<g:Grid>
+		<g:VerticalPanel>
+			<g:Label text="Выберите датуы поездки:" width="168px"/>
+			<g:Grid>
 			<g:row>
 				<g:customCell>
-					<g:CheckBox text="site1"/>
-				</g:customCell>
-				<g:customCell>
-					<g:Hyperlink text="www.google.com" targetHistoryToken="newHistoryToken"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:DateLabel/>
-				</g:customCell>
-				<g:customCell>
-					<p1:DatePicker/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Label text="Лабел!"/>
-				</g:customCell>
-				<g:customCell>
-					<g:TextBox/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Label text="Дата!"/>
+					<g:Label text="С:" width="18px"/>
 				</g:customCell>
 				<g:customCell>
 					<p1:DateBox/>
 				</g:customCell>
 			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="По:"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:DateBox/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Страна:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:ListBox width="124px" height="22px">
+					<g:item>
+					Турция
+					</g:item>
+					
+					<g:item value='2'>
+					Египет
+					</g:item>
+
+					<g:item value='2'>
+					Кипр
+					</g:item>
+
+					<g:item value='2'>
+					Мальдивы
+					</g:item>
+
+					<g:item value='2'>
+					Болгария
+					</g:item>					
+					
+					</g:ListBox>
+					
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Отель:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:ListBox width="122px">
+					<g:item>
+					2*
+					</g:item>
+					
+					<g:item value='2'>
+					3*
+					</g:item>
+
+					<g:item value='2'>
+					4*
+					</g:item>
+
+					<g:item value='2'>
+					5*
+					</g:item>
+
+				
+					
+					</g:ListBox>
+				</g:customCell>
+			</g:row>
 		</g:Grid>
+		</g:VerticalPanel>
+		<g:VerticalPanel>
+			<g:Button width="185px" height="35px">Найти</g:Button>
+		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 
