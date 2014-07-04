@@ -1,13 +1,45 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.datepicker.client">
 	<ui:style>
 	.important {
 		font-weight: bold;
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		Hello,
-		<g:Button styleName="{style.important}" ui:field="button" />
+		<g:Grid>
+			<g:row>
+				<g:customCell>
+					<g:CheckBox text="site1"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Hyperlink text="www.google.com" targetHistoryToken="newHistoryToken"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:DateLabel/>
+				</g:customCell>
+				<g:customCell>
+					<p1:DatePicker/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Лабел!"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Дата!"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:DateBox/>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
 	</g:HTMLPanel>
 </ui:UiBinder> 
