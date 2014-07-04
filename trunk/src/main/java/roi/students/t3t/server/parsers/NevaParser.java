@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class NevaParser implements SiteParser {
 
-	@Override
 	public List<HotelInfo> getList(HotelRequest request) {
 		// set up inner browser for fetching HTML page with completed javascript
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
@@ -70,7 +69,6 @@ public class NevaParser implements SiteParser {
 		return result;
 	}
 
-	@Override
 	public String buildUrl(HotelRequest request) {
 		// TODO Auto-generated method stub
 		return null;
