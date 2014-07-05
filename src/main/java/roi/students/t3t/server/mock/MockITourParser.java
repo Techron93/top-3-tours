@@ -43,7 +43,8 @@ public class MockITourParser implements SiteParser {
 			Country  siteCountry = countries[randInt(0,4)];
 			int sitePrice = randInt(1,100000);
 			int siteStars = randInt(1,5);
-			if(request.getStartDate().compareTo(siteDate) <= 0 && request.getFinishDate().compareTo(siteDate) >= 0 &&
+			if(LocalDate.parse(request.getStartDate()).compareTo(siteDate) <= 0 && 
+					LocalDate.parse(request.getFinishDate()).compareTo(siteDate) >= 0 &&
 					request.getCountry() == siteCountry && request.getMinPrice() <= sitePrice && 
 					request.getMaxPrice() >= sitePrice && request.getMinStars() <= siteStars &&
 					request.getMaxStars() >= siteStars){

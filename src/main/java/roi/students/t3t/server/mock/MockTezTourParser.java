@@ -1,7 +1,6 @@
 package roi.students.t3t.server.mock;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,8 @@ public class MockTezTourParser implements SiteParser {
 			Country  siteCountry = countries[randInt(0,4)];
 			int sitePrice = randInt(1,100000);
 			int siteStars = randInt(1,5);
-			if(request.getStartDate().compareTo(siteDate) <= 0 && request.getFinishDate().compareTo(siteDate) >= 0 &&
+			if(LocalDate.parse(request.getStartDate()).compareTo(siteDate) <= 0 && 
+					LocalDate.parse(request.getFinishDate()).compareTo(siteDate) >= 0 &&
 					request.getCountry() == siteCountry && request.getMinPrice() <= sitePrice && 
 					request.getMaxPrice() >= sitePrice && request.getMinStars() <= siteStars &&
 					request.getMaxStars() >= siteStars){

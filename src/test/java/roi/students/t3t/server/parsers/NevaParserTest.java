@@ -15,7 +15,7 @@ public class NevaParserTest {
 
 	@Test
 	public void testGetList() {
-		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.of(2014, 7, 11), LocalDate.of(2014, 7, 19), 2, 4,Country.Bulgaria);
+		HotelRequestImpl testReq = new HotelRequestImpl("2014-07-11", "2014-07-19", 2, 4,Country.Bulgaria);
 		testReq.setMinStars(2);
 		testReq.setMaxStars(4);
 		testReq.setPeopleCount(2);

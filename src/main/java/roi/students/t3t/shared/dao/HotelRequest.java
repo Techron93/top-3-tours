@@ -1,14 +1,12 @@
 package roi.students.t3t.shared.dao;
 
-import java.time.LocalDate;
-
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.TypeFood;
 
 public interface HotelRequest {
 	
-	public LocalDate getStartDate();
-	public LocalDate getFinishDate();
+	public String getStartDate();
+	public String getFinishDate();
 	public Country getCountry();
 	public int getMinStars();
 	public int getMaxStars();

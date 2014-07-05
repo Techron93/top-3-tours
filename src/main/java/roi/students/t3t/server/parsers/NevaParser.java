@@ -72,8 +72,9 @@ public class NevaParser implements SiteParser {
 	}
 
 	public String buildUrl(HotelRequest request) {
-		String startDate = getDateForUrl(request.getStartDate());
-		long period = ChronoUnit.DAYS.between(request.getStartDate(), request.getFinishDate());
+		String startDate = getDateForUrl(LocalDate.parse(request.getStartDate()));
+		long period = ChronoUnit.DAYS.between(LocalDate.parse(request.getStartDate()), 
+				LocalDate.parse(request.getFinishDate()));
 		String starsRange;
 		if(request.getMinStars() == request.getMaxStars())
 			starsRange = Integer.toString(request.getMinStars());
