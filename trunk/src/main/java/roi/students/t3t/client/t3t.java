@@ -61,11 +61,10 @@ public class t3t implements EntryPoint {
   
   public class SearchButtonHandler implements KeyUpHandler, ClickHandler {
 
-	@Override
 	public void onClick(ClickEvent event) {
 //		Request request = options_panel.getUserInput();
 //		sendRequest(request);
-		HotelRequestImpl testReq = new HotelRequestImpl(LocalDate.of(2014, 7, 11), LocalDate.of(2014, 7, 19), 2, 4,Country.Bulgaria);
+		HotelRequestImpl testReq = new HotelRequestImpl("2014-07-11", "2014-07-19", 2, 4,Country.Bulgaria);
 		testReq.setMinStars(3);
 		testReq.setMaxStars(4);
 		testReq.setPeopleCount(2);
@@ -80,7 +79,6 @@ public class t3t implements EntryPoint {
 		Request request = new RequestImpl(testReq, clientSettings);
 	}
 
-	@Override
 	public void onKeyUp(KeyUpEvent event) {
 		if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 //			Request request = options_panel.getUserInput();

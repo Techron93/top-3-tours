@@ -12,7 +12,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class ServerRequestImpl extends RemoteServiceServlet implements
 		ServerRequest {
 
-	@Override
 	public ServerResponse requestServer(Request request) {
 		// server make response
 		AgreggationService agreggationService = new AgreggationServiceImpl();
