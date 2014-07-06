@@ -2,9 +2,7 @@ package roi.students.t3t.client;
 
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.Site;
-import roi.students.t3t.shared.dao.ClientSettings;
 import roi.students.t3t.shared.dao.HotelInfo;
-import roi.students.t3t.shared.dao.Request;
 import roi.students.t3t.shared.dao.impl.ClientSettingsImpl;
 import roi.students.t3t.shared.dao.impl.HotelRequestImpl;
 import roi.students.t3t.shared.dao.impl.RequestImpl;
@@ -19,11 +17,10 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Grid;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -45,7 +42,6 @@ public class t3t implements EntryPoint {
 	private HTML results;
 	private Button testButton;
 	private Label err_label;
-	private Grid grid;
 
 	/**
 	 * This is the entry point method.
@@ -54,8 +50,7 @@ public class t3t implements EntryPoint {
 
 		final OptionsPanel options_panel = new OptionsPanel();
 
-		RootPanel rootPanel = RootPanel.get("options_panel");
-		rootPanel.add(options_panel);
+		RootPanel.get("options_panel").add(options_panel);
 		options_panel.addStyleName("options_panel");
 
 		VerticalPanel results_panel = new VerticalPanel();
@@ -76,7 +71,9 @@ public class t3t implements EntryPoint {
 		RootPanel.get("test_button").add(testButton);
 		testButton.addStyleName("test_button");
 
-		testButton.addClickHandler(new SearchButtonHandler());
+		SearchButtonHandler handler = new SearchButtonHandler();
+		testButton.addClickHandler(handler);
+		testButton.addKeyUpHandler(handler);
 
 	}
 
@@ -101,8 +98,8 @@ public class t3t implements EntryPoint {
 		}
 
 		private RequestImpl formTestRequest() {
-			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-11",
-					"2014-07-19", 2, 4, Country.Bulgaria);
+			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-10",
+					"2014-07-15", 2, 4, Country.Turkey);
 			testReq.setMinStars(3);
 			testReq.setMaxStars(4);
 			testReq.setPeopleCount(2);
@@ -112,8 +109,9 @@ public class t3t implements EntryPoint {
 
 			// client make request
 			ClientSettingsImpl clientSettings = new ClientSettingsImpl();
-			clientSettings.addSite(Site.teztour);
-			clientSettings.addSite(Site.itour);
+//			clientSettings.addSite(Site.teztour);
+//			clientSettings.addSite(Site.itour);
+			clientSettings.addSite(Site.nevatravel);
 			return new RequestImpl(testReq, clientSettings);
 		}
 
@@ -128,11 +126,13 @@ public class t3t implements EntryPoint {
 								result = result.concat("<b>No results found</b>");
 							else
 								for (HotelInfo elem : arg0.getHotelInfo()) {
-									result = result.concat("<b>price</b> = "
+									result = result.concat("<b>Price: </b> = "
 											+ elem.getPrice() + "<br>"
-											+ "<b>stars</b> = " + elem.getStars()
-											+ "<br>" + "<b>info</b> " + elem.getURL()
-											+ "<br>" + elem.getName() + "<br><br>");
+											+ "<b>Stars: </b> = " + elem.getStars()
+											+ "<br>" + "<b>Site: </b> " + elem.getURL()
+											+ "<br>" + elem.getName()
+											+ "<br>" + "<b>Start date: </b>" + elem.getStartData() 
+											+ "<br><br>");
 								}
 							results.setHTML(result);
 							testButton.setEnabled(true);
@@ -140,7 +140,8 @@ public class t3t implements EntryPoint {
 
 						@Override
 						public void onFailure(Throwable arg0) {
-							String result = "\n error: \n" + arg0.getMessage()
+							String result = "\n error: \n" + arg0.getClass() 
+									+ "\n" + arg0.getMessage()
 									+ "\n" + arg0.getCause();
 							err_label.setText(SERVER_ERROR + result);
 							testButton.setEnabled(true);
