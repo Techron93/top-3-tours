@@ -8,35 +8,42 @@ h1 {
   text-align: center;
 }
 
-.options_panel, .results_panel {
-	height: 500px;
-	padding: 5px;
+#content {
+	clear: both;
+	width: 830px;
+    margin: 0 auto;
 }
 
-.options_panel {
+#options_panel {
 	width: 300px;
+	height: 400px;
+	padding: 5px;
+	margin-right: 5px;
 	background-color: #87CEEB;
+    float: left;
 }
 
-.results_panel {
+#results_panel {
 	width: 500px;
+	height: 400px;
+	padding: 5px;
 	background-color: #FFE4B5;
+    margin-left: 315px;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
+#test_button {
+	clear: both;
+	width: 100px;
+	height: 50px;
+	margin: 0 auto;
+	display: block;
 }
 
-.gwt-DialogBox {
-  width: 400px;
-}
-
-.dialogVPanel {
+#dialogVPanel {
   margin: 5px;
 }
 
-.serverResponseLabelError {
+#err_label {
   color: red;
 }
 

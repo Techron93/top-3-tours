@@ -1,15 +1,11 @@
 package roi.students.t3t.server.mock;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.Site;
-import roi.students.t3t.shared.dao.ClientSettings;
 import roi.students.t3t.shared.dao.HotelInfo;
-import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.Request;
 import roi.students.t3t.shared.dao.ServerResponse;
 import roi.students.t3t.shared.dao.impl.ClientSettingsImpl;
@@ -30,7 +26,7 @@ public class MainMock {
 		testReq.setMaxPrice(60000);
 		
 		//client make request
-		ClientSettings clientSettings = new ClientSettingsImpl();
+		ClientSettingsImpl clientSettings = new ClientSettingsImpl();
 		clientSettings.addSite(Site.teztour);
 		clientSettings.addSite(Site.itour);
 		Request request = new RequestImpl(testReq, clientSettings);
@@ -38,15 +34,18 @@ public class MainMock {
 		AgreggationService agreggationService = new AgreggationServiceImpl();
 		ServerResponse serverResponse = agreggationService.getResult(request);
 		
-		List<HotelInfo> result= serverResponse.getHotelInfo();
+		@SuppressWarnings("unchecked")
+		List<HotelInfo> result = (List<HotelInfo>) serverResponse.getHotelInfo();
 		
-		for(HotelInfo elem : result){
-			System.out.println("price = "+elem.getPrice());
-			System.out.println("stars = "+elem.getStars());
-			System.out.println("info "+elem.getURL());
-			System.out.println(elem.getName());
-			System.out.println();
-		}
+		if (result.isEmpty()) System.out.println("no results");
+		else 
+			for(HotelInfo elem : result){
+				System.out.println("price = "+elem.getPrice());
+				System.out.println("stars = "+elem.getStars());
+				System.out.println("info "+elem.getURL());
+				System.out.println(elem.getName());
+				System.out.println();
+			}
 		
 		LocalDate localDate = LocalDate.of(2014,8,15);
 		LocalDate test = LocalDate.parse("2007-12-13");

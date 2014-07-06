@@ -8,8 +8,8 @@ public interface ServerRequestAsync {
      * GWT-RPC service  asynchronous (client-side) interface
      * @see roi.students.t3t.client.GreetingService
      */
-    void requestServer( roi.students.t3t.shared.dao.Request name, 
-    		AsyncCallback<roi.students.t3t.shared.dao.ServerResponse> callback );
+    void requestServer( roi.students.t3t.shared.dao.impl.RequestImpl name, 
+    		AsyncCallback<roi.students.t3t.shared.dao.impl.ServerResponseImpl> callback );
 
 
     /**

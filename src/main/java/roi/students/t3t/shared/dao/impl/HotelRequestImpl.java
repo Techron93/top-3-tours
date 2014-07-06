@@ -1,12 +1,15 @@
 
 package roi.students.t3t.shared.dao.impl;
 
+import java.io.Serializable;
+
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.TypeFood;
 import roi.students.t3t.shared.dao.HotelRequest;
 
-public class HotelRequestImpl implements HotelRequest {
+public class HotelRequestImpl implements HotelRequest, Serializable {
 	
+	private static final long serialVersionUID = -2697439235862041240L;
 	private String startDate;
 	private String finishDate;
 	private Country country;
