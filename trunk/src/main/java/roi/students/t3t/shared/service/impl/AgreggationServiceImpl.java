@@ -6,6 +6,7 @@ import java.util.Set;
 
 import roi.students.t3t.server.mock.MockITourParser;
 import roi.students.t3t.server.mock.MockTezTourParser;
+import roi.students.t3t.server.parsers.ParserNeva;
 import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
@@ -30,6 +31,10 @@ public class AgreggationServiceImpl implements AgreggationService {
 			case teztour:
 				MockTezTourParser tezTourParser = new MockTezTourParser();
 				parserResults.addAll(tezTourParser.getList(hotelRequest));
+				break;
+			case nevatravel:
+				ParserNeva nevaTravelParser = new ParserNeva();
+				parserResults.addAll(nevaTravelParser.getList(hotelRequest));
 				break;
 			default:
 				break;
