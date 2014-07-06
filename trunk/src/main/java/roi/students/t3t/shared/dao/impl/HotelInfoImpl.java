@@ -11,12 +11,13 @@ public class HotelInfoImpl implements HotelInfo, Serializable{
 	private int price;
 	private String name;
 	private int stars;
+	private String startData;
 	
 	
 	@Override
 	public String toString() {
 		return "HotelInfoImpl [url=" + url + ", price=" + price + ", name="
-				+ name + ", stars=" + stars + "]";
+				+ name + ", stars=" + stars + ", startData=" + startData + "]";
 	}
 
 	public HotelInfoImpl(){
@@ -33,29 +34,46 @@ public class HotelInfoImpl implements HotelInfo, Serializable{
 		setName(name);
 	}
 	
+	@Override
 	public String getURL() {
 		return url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	@Override
 	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
+	@Override
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Override
 	public int getStars() {
 		return stars;
 	}
+	
 	public void setStars(int stars) {
 		this.stars = stars;
+	}
+	
+	@Override
+	public String getStartData() {
+		return this.startData;
+	}
+	
+	public void setStartData(String data) {
+		this.startData = data;
 	}
 	
 

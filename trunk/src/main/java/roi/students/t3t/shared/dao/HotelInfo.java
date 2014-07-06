@@ -6,5 +6,6 @@ public interface HotelInfo {
 	public int getPrice();
 	public String getName();
 	public int getStars();
+	public String getStartData();
 
 }
