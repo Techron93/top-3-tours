@@ -1,9 +1,12 @@
 package roi.students.t3t.shared.dao.impl;
 
+import java.io.Serializable;
+
 import roi.students.t3t.shared.dao.HotelInfo;
 
-public class HotelInfoImpl implements HotelInfo{
+public class HotelInfoImpl implements HotelInfo, Serializable{
 	
+	private static final long serialVersionUID = 87375359649805572L;
 	private String url;
 	private int price;
 	private String name;
