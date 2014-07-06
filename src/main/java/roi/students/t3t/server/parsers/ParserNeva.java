@@ -69,26 +69,28 @@ public class ParserNeva implements SiteParser {
 			Document doc = Jsoup.parse(xmlPage);
 			Elements hotels = doc.select("div.oneTourBlock");
 			
-			//System.out.println(hotels.get(5).select("div[class=dateT floatleft]").text());
-			//return null;
+			//System.out.println(hotels.get(5).select("div[class=tourTitle]").toString());
 			
+			
+//			String dirtyUrl = hotels.get(5).select("div[class=tourTitle]").get(0).toString();
+//			return null;
+//			
 			for (Element hotel : hotels) {
 				
 				//получаем "Грязное" название отель
 				String hotelName = hotel.select("div.tourTitle").first().text();
-				System.out.println(hotelName);
-				System.out.println("\n");
+				//System.out.println(hotelName);
+				//System.out.println("\n");
 				//Отделим название отеля от звезд
 				String cleanHotelName = null;
 				String starsStr = null;
 				int stars;
-				
 				Pattern starsHotelPattern = Pattern.compile("[\\*]+");
 		        Matcher matcherPrise = starsHotelPattern.matcher(hotelName);
 				if (matcherPrise.find()) {
 					starsStr = matcherPrise.group(0).toString();
 		        }	else {
-		        	System.out.println("НАШИ ЗВЕЗЫ УКРАДЕНЫ ВСЕ ПРОПАЛО");
+		        	//System.out.println("НАШИ ЗВЕЗЫ УКРАДЕНЫ ВСЕ ПРОПАЛО");
 		        	continue; //на нашли звезд - бросам тур и переходим к следующему
 		        }
 				stars = starsStr.length();
@@ -97,44 +99,57 @@ public class ParserNeva implements SiteParser {
 				
 				//Название города
 				String sityName = hotel.select("div[class=tourInfo itemView]").get(0).select("div").get(2).text();
-				System.out.println(sityName);
-				System.out.println("\n");
+				//System.out.println(sityName);
+				//System.out.println("\n");
 				
 				//Цена
 				String priseStr = hotel.select("div[class=bookingInfo itemView]").text();
 				int cleanPrise = stringPriseToInt(priseStr);
-				System.out.println(cleanPrise);
-				System.out.println("\n");
-				
+				//System.out.println(cleanPrise);
+				//System.out.println("\n");
 				//Проданные туры не нужны
 				if(cleanPrise == -1)
 					continue;
 				
 				//Дата
 				String dirtyData = hotel.select("div[class=dateT floatleft]").text();
-				String cleanData = null;
-						
+				String cleanData = null;		
 				Pattern dataPattern = Pattern.compile("(\\d\\d)\\.(\\d\\d)\\.(\\d\\d\\d\\d)");
 		        Matcher matcherData = dataPattern.matcher(dirtyData);	
 				if (matcherData.find()) {
 					cleanData = matcherData.group(0).toString();
 		        }	else {
-		        	System.out.println("НАШИ ЗВЕЗЫ УКРАДЕНЫ ВСЕ ПРОПАЛО");
+		        	System.out.println("дата не найдена");
 		        	continue; //на нашли звезд - бросам тур и переходим к следующему
 		        }
+				
+				//Найдем ссылку на конкретный тур
+				String dirtyUrl = hotel.select("div[class=tourTitle]").get(0).toString();
+				String cleanUrl = null;
+				Pattern urlPattern = Pattern.compile("(/tours/)[\\S]+");
+		        Matcher matcherUrl = urlPattern.matcher(dirtyUrl);	
+				if (matcherUrl.find()) {
+					cleanUrl = matcherUrl.group(0).toString();
+					cleanUrl = cleanUrl.substring(0, cleanUrl.length() - 1);
+					cleanUrl = "http://www.nevatravel.ru" + cleanUrl;
+		        }	else {
+		        	System.out.println("ссылка не найдена");
+		        	//continue; //на нашли звезд - бросам тур и переходим к следующему
+		        }
+				//System.out.println(cleanUrl);
 
 				HotelInfoImpl hotelInfo = new HotelInfoImpl();
 				hotelInfo.setName(cleanHotelName);
 				hotelInfo.setPrice(cleanPrise);
 				hotelInfo.setStars(stars);
-				hotelInfo.setUrl(site.url);
+				hotelInfo.setUrl(cleanUrl);
 				hotelInfo.setStartData(cleanData);
 				
 				result.add(hotelInfo);
 			}
 			
 
-			System.out.println("Done!");
+			//System.out.println("Done!");
 			
 			
 			
@@ -143,7 +158,7 @@ public class ParserNeva implements SiteParser {
 			e.printStackTrace();
 		}
 		
-		System.out.println("HOT HOTELS!");
+		//System.out.println("HOT HOTELS!");
 		/*for (HotelInfo hotel : result){
 			System.out.println(hotel.getName());
 			System.out.println(hotel.getURL());
@@ -151,7 +166,7 @@ public class ParserNeva implements SiteParser {
 			System.out.println(hotel.getStars());
 		}*/
 		
-		System.out.println(url);
+		//System.out.println(url);
 		return result;
 	}
 	
