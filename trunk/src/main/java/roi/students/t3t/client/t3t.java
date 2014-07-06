@@ -129,7 +129,8 @@ public class t3t implements EntryPoint {
 									result = result.concat("<b>Price: </b> = "
 											+ elem.getPrice() + "<br>"
 											+ "<b>Stars: </b> = " + elem.getStars()
-											+ "<br>" + "<b>Site: </b> " + elem.getURL()
+											+ "<br>" + "<b>Site: </b> "
+											+ "<a href=\"" + elem.getURL() + "\">" + elem.getURL() + "</a>"
 											+ "<br>" + elem.getName()
 											+ "<br>" + "<b>Start date: </b>" + elem.getStartData() 
 											+ "<br><br>");
