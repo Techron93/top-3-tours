@@ -3,6 +3,7 @@ package roi.students.t3t.server.parsers;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,17 +77,19 @@ public class iTourParser implements SiteParser {
 		id = request.getCountry().itour == "cy" ? 6 : id;
 		id = request.getCountry().itour == "mv" ? 19 : id;
 		id = request.getCountry().itour == "bg" ? 66 : id;
+		LocalDate startDate = LocalDate.parse(request.getStartDate());
+		LocalDate finishDate = LocalDate.parse(request.getFinishDate());
 		String url = "http://itour.ru/tour/?city=2&room=" + request.getPeopleCount()
 				+ "&childAges[]=14&childAges[]=14&arrivalCountry=" + request.getCountry().itour
 				+"&arrivalCountryCode=" + id
 				+ "&nightsFrom=7&nightsTo=14&grade=" + (request.getMinStars() - 1)
 				+"&meal=" + request.getTypeFood()
-				+ "&priceType=1&departureFrom=" + request.getStartDate().getDayOfMonth()
-				+ "." + request.getStartDate().getMonthValue()
-				+ "." + request.getStartDate().getYear()
-				+ "&departureTo=" + request.getFinishDate().getDayOfMonth()
-				+ "." + request.getFinishDate().getMonthValue()
-				+ "." + request.getFinishDate().getYear()
+				+ "&priceType=1&departureFrom=" + startDate.getDayOfMonth()
+				+ "." + startDate.getMonthValue()
+				+ "." + startDate.getYear()
+				+ "&departureTo=" + finishDate.getDayOfMonth()
+				+ "." + finishDate.getMonthValue()
+				+ "." + finishDate.getYear()
 				+ "&priceFrom=" + request.getMinPrice()
 				+ "&priceTo=" + request.getMaxPrice()
 				+ "&mealsBetter=true&gradesBetter=false&currencyCode=RUR&bestHotels=20&limit=20";
