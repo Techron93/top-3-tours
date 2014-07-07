@@ -10,9 +10,18 @@ import roi.students.t3t.shared.dao.HotelRequest;
 public class HotelRequestImpl implements HotelRequest, Serializable {
 	
 	private static final long serialVersionUID = -2697439235862041240L;
+	
+	/**Самая ранняя дата вылета*/
 	private String startDate;
+	/**Самая поздняя дата вылета*/
 	private String finishDate;
+	/**Минимальная длительность тура*/
+	private String minDuration;
+	/**Максимальная длительность тура*/
+	private String maxDuration;
+	/**Страна прилета*/
 	private Country country;
+	
 	private int minStars;
 	private int maxStars;
 	private TypeFood typeFood;
@@ -36,7 +45,7 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	}
 	
 	public HotelRequestImpl(String startDate, String finishDate, Country country, int minStars, int maxStars, TypeFood typeFood, 
-			int minPrice, int maxPrice, int peopleCount){
+			int minPrice, int maxPrice, int peopleCount, String minDuration, String maxDuration){
 		
 		setStartDate(startDate);
 		setFinishDate(finishDate);
@@ -47,6 +56,8 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 		setMinPrice(minPrice);
 		setMaxPrice(maxPrice);
 		setPeopleCount(peopleCount);
+		setMinDuration(minDuration);
+		setMaxDuration(maxDuration);
 	}
 	
 	public String getStartDate() {
@@ -102,5 +113,17 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	}
 	public void setPeopleCount(int peopleCount) {
 		this.peopleCount = peopleCount;
+	}
+	public String getMinDuration() {
+		return minDuration;
+	}
+	public void setMinDuration(String duration) {
+		this.minDuration = duration;
+	}
+	public String getMaxDuration() {
+		return maxDuration;
+	}
+	public void setMaxDuration(String duration) {
+		this.maxDuration = duration;
 	}
 }

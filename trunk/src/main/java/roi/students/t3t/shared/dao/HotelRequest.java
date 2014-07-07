@@ -14,5 +14,6 @@ public interface HotelRequest {
 	public int getMinPrice();
 	public int getMaxPrice();
 	public int getPeopleCount(); //TODO: обсудить взрослый/ребенок
+	public String getMaxDuration();
 
 }
