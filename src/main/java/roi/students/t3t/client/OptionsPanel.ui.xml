@@ -8,14 +8,14 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<g:VerticalPanel>
-			<g:Label text="Выберите датуы поездки:" width="168px"/>
+			<g:Label text="Выберите даты поездки:" width="168px"/>
 			<g:Grid>
 			<g:row>
 				<g:customCell>
 					<g:Label text="С:" width="18px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:DateBox/>
+					<p1:DateBox ui:field="dateBox_from"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -23,7 +23,7 @@
 					<g:Label text="По:"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:DateBox/>
+					<p1:DateBox ui:field="dateBox_to"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -31,12 +31,12 @@
 					<g:Label text="Страна:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox width="124px" height="22px">
-					<g:item>
+					<g:ListBox width="124px" height="22px" ui:field="listBox_country">
+					<g:item value='0'>
 					Турция
 					</g:item>
 					
-					<g:item value='2'>
+					<g:item value='1'>
 					Египет
 					</g:item>
 
@@ -44,11 +44,11 @@
 					Кипр
 					</g:item>
 
-					<g:item value='2'>
+					<g:item value='3'>
 					Мальдивы
 					</g:item>
 
-					<g:item value='2'>
+					<g:item value='4'>
 					Болгария
 					</g:item>					
 					
@@ -61,8 +61,14 @@
 					<g:Label text="Отель:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox width="122px">
-					<g:item>
+					<g:ListBox width="122px" ui:field="listBox_stars" selectedIndex="2">
+					
+					<g:item value='0'>
+					1*
+					</g:item>
+					
+	
+					<g:item value='1'>
 					2*
 					</g:item>
 					
@@ -70,11 +76,11 @@
 					3*
 					</g:item>
 
-					<g:item value='2'>
+					<g:item value='3'>
 					4*
 					</g:item>
 
-					<g:item value='2'>
+					<g:item value='4'>
 					5*
 					</g:item>
 
@@ -86,7 +92,10 @@
 		</g:Grid>
 		</g:VerticalPanel>
 		<g:VerticalPanel>
-			<g:Button width="185px" height="35px">Найти</g:Button>
+			<g:Button width="185px" height="35px" ui:field="button_search">Найти</g:Button>
+		</g:VerticalPanel>
+		<g:VerticalPanel>
+			<g:Label ui:field="Label_res"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 
