@@ -27,7 +27,6 @@ public class MainMock {
 		
 		//client make request
 		ClientSettingsImpl clientSettings = new ClientSettingsImpl();
-		clientSettings.addSite(Site.teztour);
 		clientSettings.addSite(Site.itour);
 		Request request = new RequestImpl(testReq, clientSettings);
 		//server make response
