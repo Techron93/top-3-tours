@@ -52,6 +52,10 @@ public class OptionsPanel extends Composite implements HasText {
 	}
 
 
+	public Button getSearchButton(){
+		return button_search;
+	}
+	
 	public HotelRequest getUserInfo() {
 		// Setting DateFrom in fromat yyyy-mm-dd (very bad method)
 		int temp_month_num = dateBox_from.getValue().getMonth()+1;
@@ -118,9 +122,8 @@ public class OptionsPanel extends Composite implements HasText {
 	
 	@UiHandler("button_search")
 	void onButton_searchClick(ClickEvent event) {
+		
 		HotelRequest tmp = getUserInfo();
-		
-		
 		Label_res.setText("Вы выбрали: " + tmp.getCountry() + " ("+ tmp.getMinStars() +"*) " + " с " 
 																					+ tmp.getStartDate() + " по " + tmp.getFinishDate() + ". ");
 	}
