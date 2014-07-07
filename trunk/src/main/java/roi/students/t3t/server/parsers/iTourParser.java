@@ -59,7 +59,7 @@ public class iTourParser implements SiteParser {
 					if (priceM[j] >= '0' && priceM[j] <= '9')
 						priceS += priceM[j];
 				int price = Integer.parseInt(priceS);
-				result.add(new HotelInfoImpl(Site.itour.url, price, els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text())));
+				result.add(new HotelInfoImpl(buildUrl(request), price, els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text())));
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
