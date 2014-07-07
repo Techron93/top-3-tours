@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import roi.students.t3t.server.parsers.ParserNeva;
+import roi.students.t3t.server.parsers.iTourParser;
 import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
@@ -23,8 +24,8 @@ public class AgreggationServiceImpl implements AgreggationService {
 		for(Site site:siteSet){
 			switch(site){
 			case itour:
-//				MockITourParser itourParser = new MockITourParser();
-//				parserResults.addAll(itourParser.getList(hotelRequest));
+				iTourParser itourParser = new iTourParser();
+				parserResults.addAll(itourParser.getList(hotelRequest));
 				break;
 			case teztour:
 //				MockTezTourParser tezTourParser = new MockTezTourParser();

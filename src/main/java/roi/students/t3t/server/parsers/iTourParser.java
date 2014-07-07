@@ -80,8 +80,10 @@ public class iTourParser implements SiteParser {
 		String url = "http://itour.ru/tour/?city=2&room=" + request.getPeopleCount()
 				+ "&childAges[]=14&childAges[]=14&arrivalCountry=" + request.getCountry().itour
 				+"&arrivalCountryCode=" + id
-				+ "&nightsFrom=7&nightsTo=14&grade=" + (request.getMinStars() - 1)
-				+"&meal=" + request.getTypeFood()
+				+ "&nightsFrom=" + request.getMinDuration()
+				+ "&nightsTo=" + request.getMaxDuration()
+				+ "&grade=" + (request.getMinStars() - 1)
+				+ "&meal=" + request.getTypeFood()
 				+ "&priceType=1&departureFrom=" + request.getStartDate()
 				+ "&departureTo=" + request.getFinishDate()
 				+ "&priceFrom=" + request.getMinPrice()

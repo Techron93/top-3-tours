@@ -16,9 +16,9 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	/**Самая поздняя дата вылета*/
 	private String finishDate;
 	/**Минимальная длительность тура*/
-	private String minDuration;
+	private int minDuration;
 	/**Максимальная длительность тура*/
-	private String maxDuration;
+	private int maxDuration;
 	/**Страна прилета*/
 	private Country country;
 	
@@ -45,7 +45,7 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	}
 	
 	public HotelRequestImpl(String startDate, String finishDate, Country country, int minStars, int maxStars, TypeFood typeFood, 
-			int minPrice, int maxPrice, int peopleCount, String minDuration, String maxDuration){
+			int minPrice, int maxPrice, int peopleCount, int minDuration, int maxDuration){
 		
 		setStartDate(startDate);
 		setFinishDate(finishDate);
@@ -114,16 +114,16 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	public void setPeopleCount(int peopleCount) {
 		this.peopleCount = peopleCount;
 	}
-	public String getMinDuration() {
+	public int getMinDuration() {
 		return minDuration;
 	}
-	public void setMinDuration(String duration) {
+	public void setMinDuration(int duration) {
 		this.minDuration = duration;
 	}
-	public String getMaxDuration() {
+	public int getMaxDuration() {
 		return maxDuration;
 	}
-	public void setMaxDuration(String duration) {
+	public void setMaxDuration(int duration) {
 		this.maxDuration = duration;
 	}
 }
