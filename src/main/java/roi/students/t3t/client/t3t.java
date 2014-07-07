@@ -170,9 +170,12 @@ public class t3t implements EntryPoint {
 			}
 			
 			HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom, tempDateTo, tempStars, tempStars, tempCountry);
+			// Хардкор!
 			testReq.setPeopleCount(2);
 			testReq.setMinPrice(10000);
-			testReq.setMaxPrice(60000);
+			testReq.setMaxPrice(600000);
+			testReq.setMaxDuration(15);
+			testReq.setMinDuration(1);
 			
 //			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-10",
 //					"2014-07-15", 2, 4, Country.Turkey);
