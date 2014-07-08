@@ -64,13 +64,16 @@ public class iTourParser implements SiteParser{
 	}
 
 	public String buildUrl(HotelRequest request) {
+		final int mesure = 34;
 		int id = 0;
 		id = request.getCountry().itour == "tr" ? 1 : id;
 		id = request.getCountry().itour == "eg" ? 2 : id;
 		id = request.getCountry().itour == "cy" ? 6 : id;
 		id = request.getCountry().itour == "mv" ? 19 : id;
 		id = request.getCountry().itour == "bg" ? 66 : id;
-		String url = "http://itour.ru/tour/?city=2&room=" + request.getPeopleCount()
+		int peopleCount = 4;
+		peopleCount = request.getPeopleCount() != 4 ? (request.getPeopleCount() - 1) : peopleCount;
+		String url = "http://itour.ru/tour/?city=2&room=" + peopleCount
 				+ "&childAges[]=14&childAges[]=14&arrivalCountry=" + request.getCountry().itour
 				+"&arrivalCountryCode=" + id
 				+ "&nightsFrom=" + request.getMinDuration()
@@ -79,8 +82,8 @@ public class iTourParser implements SiteParser{
 				+ "&meal=" + request.getTypeFood()
 				+ "&priceType=1&departureFrom=" + request.getStartDate()
 				+ "&departureTo=" + request.getFinishDate()
-				+ "&priceFrom=" + request.getMinPrice()
-				+ "&priceTo=" + request.getMaxPrice()
+				+ "&priceFrom=" + request.getMinPrice() * mesure
+				+ "&priceTo=" + request.getMaxPrice() * mesure
 				+ "&mealsBetter=true&gradesBetter=false&currencyCode=RUR&bestHotels=20&limit=20";
 		return url;
 	}
