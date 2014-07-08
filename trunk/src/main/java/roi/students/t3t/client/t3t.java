@@ -39,7 +39,7 @@ public class t3t implements EntryPoint {
 	private final ServerRequestAsync requestService = GWT
 			.create(ServerRequest.class);
 
-	private final Messages messages = GWT.create(Messages.class);
+//	private final Messages messages = GWT.create(Messages.class);
 
 	private HTML results;
 	private Button testButton;
@@ -51,6 +51,7 @@ public class t3t implements EntryPoint {
 	public void onModuleLoad() {
 
 		options_panel = new OptionsPanel();
+		
 
 		RootPanel.get("options_panel").add(options_panel);
 		options_panel.addStyleName("options_panel");
@@ -59,14 +60,19 @@ public class t3t implements EntryPoint {
 		RootPanel.get("results_panel").add(results_panel);
 		results_panel.addStyleName("results_panel");
 
-		Label rlabel = new Label(messages.rlabel());
+//		Label rlabel = new Label(messages.rlabel());
+		Label rlabel = new Label("Результат:");
 		results_panel.add(rlabel);
 		
-		err_label = new Label(messages.err_label());
+		
+	//	err_label = new Label(messages.err_label());
+		err_label = new Label();
+		options_panel.addErrLabel(err_label);
 		err_label.addStyleName("err_label");
 		results_panel.add(err_label);
 		
-		results = new HTML(messages.htmlNewHtml_html(), true);
+		//results = new HTML(messages.htmlNewHtml_html(), true);
+		results = new HTML();
 		results_panel.add(results);
 
 //		testButton = new Button(messages.testButton());
@@ -89,8 +95,9 @@ public class t3t implements EntryPoint {
 			results.setHTML("");
 			err_label.setText("");
 			RequestImpl request = formTestRequest();
+			RequestImpl requestBetter = options_panel.getUserInfo();
 
-			if (request!=null) sendRequestToServer(request); else options_panel.getSearchButton().setEnabled(true);
+			if (requestBetter!=null) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);
 			
 		}
 
@@ -101,95 +108,26 @@ public class t3t implements EntryPoint {
 				results.setHTML("");
 				err_label.setText("");
 				RequestImpl request = formTestRequest();
-				if (request!=null) sendRequestToServer(request); else options_panel.getSearchButton().setEnabled(true);
+				RequestImpl requestBetter = options_panel.getUserInfo();
+				if (requestBetter!=null) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);
 			}
 		}
 
 		private RequestImpl formTestRequest() {
-			Date startDate = options_panel.dateBox_from.getValue();
-			Date finishDate = options_panel.dateBox_to.getValue();
-			if (startDate==null || finishDate==null) { 
-				err_label.setText("Empty date");
-				
-				return null;
-			} else { 
 			
-			// Setting DateFrom in fromat yyyy-mm-dd (very bad method)
-			int temp_month_num = startDate.getMonth()+1;
-			String temp_month_str;
-			if (temp_month_num>9) temp_month_str = Integer.toString(temp_month_num);
-			else temp_month_str = "0" + Integer.toString(temp_month_num);
-			
-			int temp_day_num = startDate.getDate();
-			String temp_day_str;
-			if (temp_day_num>9) temp_day_str = Integer.toString(temp_day_num);
-			else temp_day_str = "0" + Integer.toString(temp_day_num);
-			
-			String tempDateFrom = (startDate.getYear() + 1900 )+ "-" + temp_month_str + "-" + temp_day_str;
-			
-		
-			// Setting DateTo in fromat yyyy-mm-dd 
-			 temp_month_num = finishDate.getMonth()+1;
-			 
-			if (temp_month_num>9) temp_month_str = Integer.toString(temp_month_num);
-			else temp_month_str = "0" + Integer.toString(temp_month_num);
-			
-			 temp_day_num = finishDate.getDate();
-			
-			if (temp_day_num>9) temp_day_str = Integer.toString(temp_day_num);
-			else temp_day_str = "0" + Integer.toString(temp_day_num);
-			
-			String tempDateTo = (finishDate.getYear() + 1900 )+ "-" + temp_month_str + "-" + temp_day_str;
-			
-			
-			int tempStars = options_panel.listBox_stars.getSelectedIndex() + 1;
-			Country tempCountry;
-			switch (options_panel.listBox_country.getSelectedIndex()) {
-			case 0:
-				tempCountry = Country.Turkey;
-				break;
-				
-			case 1:
-				tempCountry = Country.Egypt;
-				break;
-				
-			case 2:
-				tempCountry = Country.Cyprus;
-				break;
-				
-			case 3:
-				tempCountry = Country.Maldives;
-				break;
-				
-			case 4:
-				tempCountry = Country.Bulgaria;
-				break;
-
-			default: tempCountry = Country.Turkey;
-				break;
-			}
-			
-			HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom, tempDateTo, tempStars, tempStars, tempCountry);
-			// Хардкор!
+			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-10",
+					"2014-07-15", 2, 4, Country.Turkey);
+			testReq.setMinStars(3);
+			testReq.setMaxStars(4);
 			testReq.setPeopleCount(2);
+			// TODO: ограничить setter'ы, например, нельзя отрицательные числа
 			testReq.setMinPrice(10000);
-			testReq.setMaxPrice(600000);
-			testReq.setMaxDuration(15);
-			testReq.setMinDuration(1);
-			
-//			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-10",
-//					"2014-07-15", 2, 4, Country.Turkey);
-//			testReq.setMinStars(3);
-//			testReq.setMaxStars(4);
-//			testReq.setPeopleCount(2);
-//			// TODO: ограничить setter'ы, например, нельзя отрицательные числа
-//			testReq.setMinPrice(10000);
-//			testReq.setMaxPrice(60000);
+			testReq.setMaxPrice(60000);
 
 			// client make request
 			ClientSettingsImpl clientSettings = new ClientSettingsImpl();
-//			clientSettings.addSite(Site.teztour);
-//			clientSettings.addSite(Site.itour);
+			clientSettings.addSite(Site.teztour);
+			clientSettings.addSite(Site.itour);
 			clientSettings.addSite(Site.nevatravel);
 			
 			return new RequestImpl(testReq, clientSettings); }
@@ -203,7 +141,7 @@ public class t3t implements EntryPoint {
 						public void onSuccess(ServerResponseImpl arg0) {
 							String result = "";
 							if (arg0.getHotelInfo().isEmpty())
-								result = result.concat("<b>No results found</b>");
+								result = result.concat("<b>По вашему запросу ничего не найдено</b>");
 							else
 								for (HotelInfo elem : arg0.getHotelInfo()) {
 									result = result.concat("<b>Price: </b> = "
@@ -231,4 +169,4 @@ public class t3t implements EntryPoint {
 		}
 
 	}
-}
+
