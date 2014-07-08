@@ -1,6 +1,5 @@
 package roi.students.t3t.server.parsers;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -29,20 +28,18 @@ import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
 
 
 
-public class ParserNeva implements SiteParser {
-	
+public class ParserNeva implements SiteParser{
 	final int WAIT_JAVASCRIPT = 10000;
 	final Site site = Site.nevatravel;
 	
 	 public ParserNeva() {}
 
-	 /**
+	/**
 	  * Возвращает список непроданных путевок с сайта www.nevatravel.ru,
 	  * соответствующий полученному запросу.
 	  * Данные берем с первой страницы, которую выдает www.nevatravel.ru
 	  */
 	public List<HotelInfo> getList(HotelRequest request) {
-		
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
 		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
@@ -262,9 +259,4 @@ public class ParserNeva implements SiteParser {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	
-	
-
 }
