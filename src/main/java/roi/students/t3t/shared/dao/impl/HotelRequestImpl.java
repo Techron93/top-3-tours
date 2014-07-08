@@ -16,9 +16,9 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	/**Самая поздняя дата вылета*/
 	private String finishDate;
 	/**Минимальная длительность тура*/
-	private int minDuration;
+	private int minDuration = 7;
 	/**Максимальная длительность тура*/
-	private int maxDuration;
+	private int maxDuration = 14;
 	/**Страна прилета*/
 	private Country country;
 	

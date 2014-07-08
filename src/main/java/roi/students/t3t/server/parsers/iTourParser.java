@@ -1,18 +1,12 @@
 package roi.students.t3t.server.parsers;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.soap.Node;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -21,18 +15,17 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import roi.students.t3t.server.SiteParser;
-import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
 
-public class iTourParser implements SiteParser {
+public class iTourParser implements SiteParser{
 	
 	public iTourParser()
 	{}
 
 	public List<HotelInfo> getList(HotelRequest request) {
-		List<HotelInfo> result = new ArrayList(0);
+		List<HotelInfo> result = new ArrayList<HotelInfo>(0);
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
 		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);

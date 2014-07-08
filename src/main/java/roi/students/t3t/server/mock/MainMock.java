@@ -28,6 +28,7 @@ public class MainMock {
 		//client make request
 		ClientSettingsImpl clientSettings = new ClientSettingsImpl();
 		clientSettings.addSite(Site.itour);
+		clientSettings.addSite(Site.nevatravel);
 		Request request = new RequestImpl(testReq, clientSettings);
 		//server make response
 		AgreggationService agreggationService = new AgreggationServiceImpl();
