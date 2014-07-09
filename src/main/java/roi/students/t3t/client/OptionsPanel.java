@@ -132,39 +132,7 @@ public class OptionsPanel extends Composite {
 			return null;
 		} else {
 
-			// Setting DateFrom in fromat yyyy-mm-dd (very bad method)
-			// int temp_month_num = startDate.getMonth()+1;
-			// String temp_month_str;
-			// if (temp_month_num>9) temp_month_str =
-			// Integer.toString(temp_month_num);
-			// else temp_month_str = "0" + Integer.toString(temp_month_num);
-			//
-			// int temp_day_num = startDate.getDate();
-			// String temp_day_str;
-			// if (temp_day_num>9) temp_day_str =
-			// Integer.toString(temp_day_num);
-			// else temp_day_str = "0" + Integer.toString(temp_day_num);
-			//
-			// String tempDateFrom = (startDate.getYear() + 1900 )+ "-" +
-			// temp_month_str + "-" + temp_day_str;
-
-			// Setting DateTo in fromat yyyy-mm-dd
-			// temp_month_num = finishDate.getMonth()+1;
-			//
-			// if (temp_month_num>9) temp_month_str =
-			// Integer.toString(temp_month_num);
-			// else temp_month_str = "0" + Integer.toString(temp_month_num);
-			//
-			// temp_day_num = finishDate.getDate();
-			//
-			// if (temp_day_num>9) temp_day_str =
-			// Integer.toString(temp_day_num);
-			// else temp_day_str = "0" + Integer.toString(temp_day_num);
-			//
-			// String tempDateTo = (finishDate.getYear() + 1900 )+ "-" +
-			// temp_month_str + "-" + temp_day_str;
-
-			int tempStars = listBox_stars.getSelectedIndex() + 1;
+			int tempStars = listBox_stars.getSelectedIndex() + 2;
 			Country tempCountry;
 			switch (listBox_country.getSelectedIndex()) {
 			case 0:
@@ -228,19 +196,33 @@ public class OptionsPanel extends Composite {
 				tempFood = TypeFood.NA;
 				break;
 			}
+// Валидация формата входных данных
+			int tempMinPrice = -1;
+			try { tempMinPrice = Integer.parseInt(textBox_priceFrom.getValue());
+			}
+			catch (NumberFormatException ex) {err_label.setText("Ошибка! Неверный формат данных."); }
 
-			int tempMinPrice = Integer.parseInt(textBox_priceFrom.getValue());
+			int tempMaxPrice = -2;
+			try { tempMaxPrice = Integer.parseInt(textBox_priceTo.getValue());
+			}
+			catch  (NumberFormatException ex) {err_label.setText("Ошибка! Неверный формат данных."); }
+			
 
-			int tempMaxPrice = Integer.parseInt(textBox_priceTo.getValue());
-
-			int tempPeopleCount = listBox_propleCount.getSelectedIndex() + 1;
-
-			int tempDurationFrom = Integer.parseInt(textBox_durationFrom
-					.getValue());
-
-			int tempDurationTo = Integer
-					.parseInt(textBox_durationTo.getValue());
-
+			int tempPeopleCount = listBox_propleCount.getSelectedIndex()+1;
+			
+			int tempDurationFrom = -1;
+			try {
+			tempDurationFrom = Integer.parseInt(textBox_durationFrom.getValue());
+			}
+			catch (NumberFormatException ex) {err_label.setText("Ошибка! ваолптловда"); }
+			
+			int tempDurationTo = -2;
+			try{
+			tempDurationTo = Integer.parseInt(textBox_durationTo.getValue());
+			}
+			catch (NumberFormatException ex) {err_label.setText("Ошибка! Неверный формат данных."); }
+			
+			
 			// HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom,
 			// tempDateTo, tempStars, tempStars, tempCountry);
 
