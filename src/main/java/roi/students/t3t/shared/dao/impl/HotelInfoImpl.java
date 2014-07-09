@@ -34,6 +34,14 @@ public class HotelInfoImpl implements HotelInfo, Serializable{
 		setName(name);
 	}
 	
+	public HotelInfoImpl(String url, int price, String name, int stars, String startData){
+		setUrl(url);
+		setPrice(price);
+		setStars(stars);
+		setName(name);
+		setStartData(startData);
+	}
+	
 	@Override
 	public String getURL() {
 		return url;
