@@ -51,14 +51,14 @@ public class ServerRequestImpl extends RemoteServiceServlet implements
 		}
 
 		// Convert string date to LocalDate
-		LocalDate start_date = LocalDate.parse(hr.getStartDate());
-		LocalDate finish_date = LocalDate.parse(hr.getFinishDate());
+		//LocalDate start_date = LocalDate.parse(hr.getStartDate());
+		//LocalDate finish_date = LocalDate.parse(hr.getFinishDate());
 		// Check if date is not null
-		if (start_date == null || finish_date == null)
-			throw new IllegalArgumentException("invalid date");
+		//if (start_date == null || finish_date == null)
+		//	throw new IllegalArgumentException("invalid date");
 		// Check if start_date > finish_date
-		if (start_date.isAfter(finish_date))
-			throw new IllegalArgumentException("start_date > finish_date");
+		//if (start_date.isAfter(finish_date))
+		//	throw new IllegalArgumentException("start_date > finish_date");
 
 		int min_price = hr.getMinPrice();
 		int max_price = hr.getMaxPrice();
