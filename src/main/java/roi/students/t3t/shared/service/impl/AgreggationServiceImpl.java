@@ -9,8 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import roi.students.t3t.server.parsers.ParserITour;
 import roi.students.t3t.server.parsers.ParserNeva;
-import roi.students.t3t.server.parsers.iTourParser;
 import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
@@ -21,7 +21,7 @@ import roi.students.t3t.shared.service.AgreggationService;
 
 public class AgreggationServiceImpl implements AgreggationService {
 
-	final iTourParser itourParser = new iTourParser();
+	final ParserITour itourParser = new ParserITour();
 	final ParserNeva nevaTravelParser = new ParserNeva();
 
 	public ServerResponse getResult(Request request) {
