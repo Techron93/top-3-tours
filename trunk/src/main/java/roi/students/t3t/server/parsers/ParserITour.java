@@ -149,5 +149,11 @@ public class ParserITour implements SiteParser{
 		newFormat.append(date.getYear());
 		return newFormat.toString();
 	}
+	
+	private boolean compareDates(String date1, String date2)
+	{
+		
+		return false;
+	}
 }
 
