@@ -1,53 +1,33 @@
 /** Add css rules here for your application. */
 
-h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+.search_button {
+	padding: 0px !important;
+	width: 185px;
+	float: left;
 }
 
-#content {
-	clear: both;
-	width: 830px;
-    margin: 0 auto;
+#label_dates {
+	text-align: left;
+	font-size: small;
+	font-style: italic;
 }
 
-#options_panel {
-	width: 300px;
-	height: 500px;
-	padding: 5px;
-	margin-right: 5px;
-	background-color: #87CEEB;
-    float: left;
+.row_label {
+	margin-top: 5px;
+	text-align: right;
+	font-size: small;
 }
 
-#results_panel {
-	width: 500px;
-	height: 500px;
-	padding: 5px;
-	background-color: #FFE4B5;
-    margin-left: 315px;
+.row  {
+	margin-bottom: 10px;
 }
 
-/*#test_button {
-	clear: both;
+.row select {
 	width: 100px;
-	height: 50px;
-	margin: 0 auto;
-	display: block;
-}*/
-
-#dialogVPanel {
-  margin: 5px;
+	margin-left: 10px;
 }
 
-#err_label {
-  color: red;
-}
-
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
+.row input {
+	width: 100px;
+	margin-left: 10px;
 }

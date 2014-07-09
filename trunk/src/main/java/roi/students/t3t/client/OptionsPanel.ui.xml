@@ -7,12 +7,12 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		<g:VerticalPanel width="186px">
-			<g:Label text="Выберите дату вылета:" width="181px"/>
-			<g:Grid width="182px">
+		<g:VerticalPanel>
+			<g:Label text="Выберите дату вылета:" ui:field="label_date"/>
+			<g:Grid>
 			<g:row>
 				<g:customCell>
-					<g:Label text="С:" width="18px" horizontalAlignment="ALIGN_LEFT"/>
+					<g:Label text="С:" ui:field="label_from"/>
 				</g:customCell>
 				<g:customCell>
 					<p1:DateBox ui:field="dateBox_from"/>
@@ -20,18 +20,18 @@
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<g:Label text="По:"/>
+					<g:Label text="По:" ui:field="label_to"/>
 				</g:customCell>
 				<g:customCell>
 					<p1:DateBox ui:field="dateBox_to"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>
-			<g:Label text="Длительность тура (дней):"/>
-			<g:Grid width="182px">
+			<g:Label text="Длительность тура (дней):" ui:field="label_duration"/>
+			<g:Grid>
 				<g:row>
 					<g:customCell>
-						<g:Label text="От:     " horizontalAlignment="ALIGN_LEFT"/>
+						<g:Label text="От:" ui:field="label_min_duration"/>
 					</g:customCell>
 					<g:customCell>
 						<g:TextBox ui:field="textBox_durationFrom" text="1"/>
@@ -39,7 +39,7 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="До:"/>
+						<g:Label text="До:" ui:field="label_max_duration"/>
 					</g:customCell>
 					<g:customCell>
 						<g:TextBox ui:field="textBox_durationTo" text="10"/>
@@ -47,10 +47,10 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Страна:"/>
+						<g:Label text="Страна:" ui:field="label_country"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox width="124px" height="22px" ui:field="listBox_country">
+						<g:ListBox ui:field="listBox_country">
 					<g:item value='0'>
 					Турция
 					</g:item>
@@ -76,15 +76,10 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Отель:"/>
+						<g:Label text="Отель:" ui:field="label_hotel"/>
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox width="124px" ui:field="listBox_stars" selectedIndex="2">
-					
-					<g:item value='0'>
-					1*
-					</g:item>
-					
+						<g:ListBox ui:field="listBox_stars" selectedIndex="2">
 	
 					<g:item value='1'>
 					2*
@@ -101,8 +96,6 @@
 					<g:item value='4'>
 					5*
 					</g:item>
-
-				
 					
 					</g:ListBox>
 					</g:customCell>
@@ -110,12 +103,12 @@
 			</g:Grid>
 		</g:VerticalPanel>
 		<g:VerticalPanel>
-			<g:Button width="185px" height="35px" ui:field="button_search">Найти</g:Button>
+			<g:Button ui:field="button_search">Найти</g:Button>
 		</g:VerticalPanel>
 		<g:VerticalPanel>
-			<g:DisclosurePanel animationEnabled="true">
+			<g:DisclosurePanel animationEnabled="true" ui:field="panel_extra_param">
 				<g:header>Дополнительные параметры:</g:header>
-				<g:Grid width="" height="">
+				<g:Grid>
 					<g:row>
 						<g:customCell>
 							<g:Label text="Стоимость:"/>
@@ -142,7 +135,7 @@
 							<g:Label text="Питание:"/>
 						</g:customCell>
 						<g:customCell>
-							<g:ListBox width="129px" ui:field="listBox_food">
+							<g:ListBox ui:field="listBox_food">
 							
 						<g:item value='0'>
 							Любое
@@ -182,7 +175,7 @@
 							<g:Label text="Людей:"/>
 						</g:customCell>
 						<g:customCell>
-							<g:ListBox width="129px" ui:field="listBox_propleCount" selectedIndex="1">
+							<g:ListBox ui:field="listBox_propleCount" selectedIndex="1">
 												
 						<g:item value='1'>
 							1
@@ -209,9 +202,9 @@
 				</g:Grid>
 			</g:DisclosurePanel>
 					<g:VerticalPanel>
-					<g:DisclosurePanel width="224px" animationEnabled="true">
+					<g:DisclosurePanel animationEnabled="true" ui:field="panel_sites">
 						<g:header>Сайты для анализа:</g:header>
-						<g:Grid width="5cm" height="1cm">
+						<g:Grid>
 							<g:row>
 								<g:customCell>
 									<g:CheckBox text="www.nevatravel.ru" value="true" ui:field="checkBox_nevaTravel"/>

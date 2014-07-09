@@ -8,16 +8,21 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!--                                                               -->
 <!-- Consider inlining CSS to reduce the number of requested files -->
 <!--                                                               -->
 <link type="text/css" rel="stylesheet" href="t3t.css">
+<link type="text/css" rel="stylesheet" href="bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap-theme.min.css">
+<link type="text/css" rel="stylesheet" href="jumbotron-narrow.css">
 
 <!--                                           -->
 <!-- Any title is fine                         -->
 <!--                                           -->
 <title>Top 3 Tours</title>
+<br>
 
 <!--                                           -->
 <!-- This script loads your compiled module.   -->
@@ -47,25 +52,78 @@
 			application to display correctly.</div>
 	</noscript>
 
-	<h1>Top 3 Tours</h1> <br>
-<!-- 
-	<table align="center">
-		<tr>
-			<td colspan="2" id="test_button"></td>
-		</tr>
-		<tr>
-			<td id="options_panel"></td>
-			<td id="results_panel"></td>
-		</tr>
-		<tr>
-			<td colspan="2" style="color: red;" id="errorLabelContainer"></td>
-		</tr>
-	</table>
-	 <div align="center" id="test_button"></div><br>
-	 -->
-	 <div id="content">
-	 <div id="options_panel"></div>
-	 <div id="results_panel"></div>
-	 </div>
+	<div class="container">
+		<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="#">Search</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+			<h3 class="text-muted">Top 3 Tours</h3>
+		</div>
+
+		<div class="jumbotron">
+			<div class="container-fluid" id="left_panel">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div id="label_date" class="col-md-6"></div>
+						</div>
+						<div class="row">
+							<div id="label_from" class="col-md-1"></div>
+							<div id="datebox_from" class="col-md-1"></div>
+						</div>
+						<div class="row">
+							<div id="label_to" class="col-md-1"></div>
+							<div id="datebox_to" class="col-md-1"></div>
+						</div>
+						<div class="row">
+							<div id="label_duration" class="col-md-6"></div>
+						</div>
+						<div class="row">
+							<div id="label_min_duration" class="col-md-1"></div>
+							<div id="list_min_duration" class="col-md-1"></div>
+						</div>
+						<div class="row">
+							<div id="label_max_duration" class="col-md-1"></div>
+							<div id="list_max_duration" class="col-md-1"></div>
+						</div>
+						<div class="row">
+							<div id="label_country" class="col-md-1"></div>
+							<div id="list_country" class="col-md-1"></div>
+						</div>
+						<div class="row">
+							<div id="label_hotel" class="col-md-1"></div>
+							<div id="list_stars" class="col-md-1"></div>
+						</div>
+						<div class="row">
+							<div id="search_button" class="col-md-6"></div>
+						</div>
+					</div>
+					<!-- col-md-8 -->
+
+					<div class="col-md-6">
+						<div class="row">
+							<div class="row">
+								<div id="panel_extra_param" class="col-md-6"></div>
+							</div>
+							<div class="row">
+								<div id="panel_sites" class="col-md-6"></div>
+							</div>
+						</div>
+					</div>
+					<!-- col-md-8 -->
+				</div>
+			</div>
+		</div>
+
+		<div id="content">
+			<div id="results_panel"></div>
+		</div>
+		<div class="footer">
+			<p>&copy; Company 2014</p>
+		</div>
+	</div>
+	<!-- container -->
 </body>
 </html>

@@ -5,75 +5,112 @@ import java.util.Date;
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.Site;
 import roi.students.t3t.shared.TypeFood;
-import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.impl.ClientSettingsImpl;
 import roi.students.t3t.shared.dao.impl.HotelRequestImpl;
 import roi.students.t3t.shared.dao.impl.RequestImpl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.DisclosurePanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.event.dom.client.FocusEvent;
 
-public class OptionsPanel extends Composite implements HasText {
+public class OptionsPanel extends Composite {
 
 	private static OptionsPanelUiBinder uiBinder = GWT
 			.create(OptionsPanelUiBinder.class);
+	
+	// labels
+	@UiField Label label_date;
+	@UiField Label label_from;
+	@UiField Label label_to;
+	@UiField Label label_duration;
+	@UiField Label label_min_duration;
+	@UiField Label label_max_duration;
+	@UiField Label label_country;
+	@UiField Label label_hotel;
+	@UiField Label Label_res;
+
+	// date boxes
 	@UiField DateBox dateBox_from;
 	@UiField DateBox dateBox_to;
+
+	// list boxes
 	@UiField ListBox listBox_country;
 	@UiField ListBox listBox_stars;
-	@UiField Button button_search;
-	@UiField Label Label_res;
 	@UiField ListBox listBox_food;
 	@UiField ListBox listBox_propleCount;
+	
+	// panels
+	@UiField DisclosurePanel panel_extra_param;
+	@UiField DisclosurePanel panel_sites;
+	
+	// text boxes
 	@UiField TextBox textBox_durationFrom;
 	@UiField TextBox textBox_durationTo;
 	@UiField TextBox textBox_priceFrom;
 	@UiField TextBox textBox_priceTo;
+	
+	// check boxes
 	@UiField CheckBox checkBox_nevaTravel;
 	@UiField CheckBox checkBox_iTour;
 	@UiField CheckBox checkBox_site3;
+	
+	// buttons
+	@UiField Button button_search;
 
 	interface OptionsPanelUiBinder extends UiBinder<Widget, OptionsPanel> {
 	}
 	private Label err_label;
 	public void addErrLabel(Label errLabel) {
 		err_label = errLabel;
-	
 	}
 
 	public OptionsPanel() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		RootPanel.get("label_date").add(label_date);
+		RootPanel.get("label_from").add(label_from);
+		RootPanel.get("label_to").add(label_to);
+		RootPanel.get("label_duration").add(label_duration);
+		RootPanel.get("label_min_duration").add(label_min_duration);
+		RootPanel.get("label_max_duration").add(label_max_duration);
+		RootPanel.get("label_country").add(label_country);
+		RootPanel.get("label_hotel").add(label_hotel);
+		
+		RootPanel.get("datebox_from").add(dateBox_from);
+		RootPanel.get("datebox_to").add(dateBox_to);
+		
+		RootPanel.get("list_country").add(listBox_country);
+		RootPanel.get("list_stars").add(listBox_stars);
+//		RootPanel.get().add(listBox_food);
+//		RootPanel.get().add(listBox_propleCount);
+		
+		RootPanel.get("panel_extra_param").add(panel_extra_param);
+		RootPanel.get("panel_sites").add(panel_sites);
+		
+		RootPanel.get("list_min_duration").add(textBox_durationFrom);
+		RootPanel.get("list_max_duration").add(textBox_durationTo);
+//		RootPanel.get().add(textBox_priceFrom);
+//		RootPanel.get().add(textBox_priceTo);
+//		
+//		RootPanel.get().add(checkBox_nevaTravel);
+//		RootPanel.get().add(checkBox_iTour);
+//		RootPanel.get().add(checkBox_site3);
+		
+		RootPanel.get("search_button").add(button_search);
 	}
-
-	public OptionsPanel(String firstName) {
-		initWidget(uiBinder.createAndBindUi(this));
-//		button.setText("Options");
-	}
-
-	public void setText(String text) {
-//		button.setText(text);
-	}
-
-	public String getText() {
-		return "";
-//		return button.getText();
-	}
-
 
 	public Button getSearchButton(){
 		return button_search;
