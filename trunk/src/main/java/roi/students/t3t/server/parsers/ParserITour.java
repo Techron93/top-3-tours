@@ -56,14 +56,16 @@ public class ParserITour implements SiteParser{
 				Elements els_price = elements.get(i).select("a.alt.ng-scope.ng-binding");
 				Elements els_link= elements.get(i).select("a.btn.btn-xs.btn-green.btn-more");
 				String hyperLink = els_link.get(0).attr("abs:href");
-				
+				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
+				String day = els_date.text();
+				String[] date = day.split(",");
 				StringBuilder priceString = new StringBuilder(els_price.get(0).text());
 				String[] priceM = priceString.substring(2, priceString.length() - 5).split(" ");
 				String priceS = "";
 				for (String temp : priceM)
 					priceS += temp;
 				
-				result.add(new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text())));
+				result.add(new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text()), date[0]));
 			}
 		}
 		catch (MalformedURLException e)
@@ -81,6 +83,7 @@ public class ParserITour implements SiteParser{
 		int roundedMinPrice = (int) Math.round(request.getMinPrice() / mesure);
 		int roundedMaxPrice = (int) Math.round(request.getMaxPrice() / mesure);
 		
+		
 		StringBuilder url = new StringBuilder();
 		url.append("http://itour.ru/tour/?city=2&room=" + peopleCount);
 		url.append("&childAges[]=14&childAges[]=14&arrivalCountry=" + request.getCountry().itour);
@@ -89,11 +92,11 @@ public class ParserITour implements SiteParser{
 		url.append("&nightsTo=" + request.getMaxDuration());
 		url.append("&grade=" + (request.getMinStars() - 1));
 		url.append("&meal=" + request.getTypeFood());
-		url.append("&priceType=1&departureFrom=" + request.getStartDate());
-		url.append("&departureTo=" + request.getFinishDate());
+		url.append("&priceType=1&departureFrom=" + formatDate(request.getStartDate()));
+		url.append("&departureTo=" + formatDate(request.getFinishDate()));
 		url.append("&priceFrom=" + roundedMinPrice);
 		url.append("&priceTo=" + roundedMaxPrice);
-		url.append("&mealsBetter=true&gradesBetter=false&currencyCode=RUR&bestHotels=20&limit=20");
+		url.append("&mealsBetter=false&gradesBetter=false&currencyCode=RUR&bestHotels=20&limit=20");
 		
 		return url.toString();
 	}
@@ -128,6 +131,16 @@ public class ParserITour implements SiteParser{
 		{e.printStackTrace();}
 		
 		return result.doubleValue();
+	}
+	
+	private String formatDate(String oldFormat)
+	{
+		String[] temp = oldFormat.split("-");
+		StringBuilder newFormat = new StringBuilder();
+		newFormat.append(temp[2] + ".");
+		newFormat.append(temp[1] + ".");
+		newFormat.append(temp[0]);
+		return newFormat.toString();
 	}
 }
 
