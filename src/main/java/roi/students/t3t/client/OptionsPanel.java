@@ -90,31 +90,31 @@ public class OptionsPanel extends Composite implements HasText {
 		} else { 
 		
 		// Setting DateFrom in fromat yyyy-mm-dd (very bad method)
-		int temp_month_num = startDate.getMonth()+1;
-		String temp_month_str;
-		if (temp_month_num>9) temp_month_str = Integer.toString(temp_month_num);
-		else temp_month_str = "0" + Integer.toString(temp_month_num);
-		
-		int temp_day_num = startDate.getDate();
-		String temp_day_str;
-		if (temp_day_num>9) temp_day_str = Integer.toString(temp_day_num);
-		else temp_day_str = "0" + Integer.toString(temp_day_num);
-		
-		String tempDateFrom = (startDate.getYear() + 1900 )+ "-" + temp_month_str + "-" + temp_day_str;
-		
+//		int temp_month_num = startDate.getMonth()+1;
+//		String temp_month_str;
+//		if (temp_month_num>9) temp_month_str = Integer.toString(temp_month_num);
+//		else temp_month_str = "0" + Integer.toString(temp_month_num);
+//		
+//		int temp_day_num = startDate.getDate();
+//		String temp_day_str;
+//		if (temp_day_num>9) temp_day_str = Integer.toString(temp_day_num);
+//		else temp_day_str = "0" + Integer.toString(temp_day_num);
+//		
+	//	String tempDateFrom = (startDate.getYear() + 1900 )+ "-" + temp_month_str + "-" + temp_day_str;
+			
 	
 		// Setting DateTo in fromat yyyy-mm-dd 
-		 temp_month_num = finishDate.getMonth()+1;
-		 
-		if (temp_month_num>9) temp_month_str = Integer.toString(temp_month_num);
-		else temp_month_str = "0" + Integer.toString(temp_month_num);
-		
-		 temp_day_num = finishDate.getDate();
-		
-		if (temp_day_num>9) temp_day_str = Integer.toString(temp_day_num);
-		else temp_day_str = "0" + Integer.toString(temp_day_num);
-		
-		String tempDateTo = (finishDate.getYear() + 1900 )+ "-" + temp_month_str + "-" + temp_day_str;
+//		 temp_month_num = finishDate.getMonth()+1;
+//		 
+//		if (temp_month_num>9) temp_month_str = Integer.toString(temp_month_num);
+//		else temp_month_str = "0" + Integer.toString(temp_month_num);
+//		
+//		 temp_day_num = finishDate.getDate();
+//		
+//		if (temp_day_num>9) temp_day_str = Integer.toString(temp_day_num);
+//		else temp_day_str = "0" + Integer.toString(temp_day_num);
+//		
+//		String tempDateTo = (finishDate.getYear() + 1900 )+ "-" + temp_month_str + "-" + temp_day_str;
 		
 		
 		int tempStars = listBox_stars.getSelectedIndex() + 1;
@@ -192,9 +192,9 @@ public class OptionsPanel extends Composite implements HasText {
 		int tempDurationTo = Integer.parseInt(textBox_durationTo.getValue());
 		
 		
-		HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom, tempDateTo, tempStars, tempStars, tempCountry);
+	//	HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom, tempDateTo, tempStars, tempStars, tempCountry);
 		
-		HotelRequestImpl RequestFull = new HotelRequestImpl(tempDateFrom, tempDateTo, tempCountry, tempStars, 
+		HotelRequestImpl RequestFull = new HotelRequestImpl(startDate, finishDate, tempCountry, tempStars, 
 				                       tempStars, tempFood, tempMinPrice, tempMaxPrice, tempPeopleCount, tempDurationFrom, tempDurationTo);
 		
 		

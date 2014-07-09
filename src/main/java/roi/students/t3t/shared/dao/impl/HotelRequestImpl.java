@@ -2,6 +2,7 @@
 package roi.students.t3t.shared.dao.impl;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.TypeFood;
@@ -12,9 +13,9 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	private static final long serialVersionUID = -2697439235862041240L;
 	
 	/**Самая ранняя дата вылета*/
-	private String startDate;
+	private Date startDate;
 	/**Самая поздняя дата вылета*/
-	private String finishDate;
+	private Date finishDate;
 	/**Минимальная длительность тура*/
 	private int minDuration = 7;
 	/**Максимальная длительность тура*/
@@ -31,12 +32,12 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 	private int peopleCount = 0; //TODO: сделать enum на основе предложений сайтов
 	
 	public HotelRequestImpl() {
-		startDate = null; //текущая дата
-		finishDate = null;
+		startDate = new Date(); //текущая дата
+		finishDate = new Date();
 		country = null;
 	}
 	
-	public HotelRequestImpl(String startDate, String finishDate, int minStars, int maxStars, Country country){
+	public HotelRequestImpl(Date startDate, Date finishDate, int minStars, int maxStars, Country country){
 		setStartDate(startDate);
 		setFinishDate(finishDate);
 		setMinStars(minStars);
@@ -44,7 +45,7 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 		setCountry(country);
 	}
 	
-	public HotelRequestImpl(String startDate, String finishDate, Country country, int minStars, int maxStars, TypeFood typeFood, 
+	public HotelRequestImpl(Date startDate, Date finishDate, Country country, int minStars, int maxStars, TypeFood typeFood, 
 			int minPrice, int maxPrice, int peopleCount, int minDuration, int maxDuration){
 		
 		setStartDate(startDate);
@@ -60,16 +61,16 @@ public class HotelRequestImpl implements HotelRequest, Serializable {
 		setMaxDuration(maxDuration);
 	}
 	
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public String getFinishDate() {
+	public Date getFinishDate() {
 		return finishDate;
 	}
-	public void setFinishDate(String finishDate) {
+	public void setFinishDate(Date finishDate) {
 		this.finishDate = finishDate;
 	}
 	public Country getCountry() {

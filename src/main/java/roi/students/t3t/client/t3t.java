@@ -94,7 +94,7 @@ public class t3t implements EntryPoint {
 			options_panel.getSearchButton().setEnabled(false);
 			results.setHTML("");
 			err_label.setText("");
-			RequestImpl request = formTestRequest();
+//			RequestImpl request = formTestRequest();
 			RequestImpl requestBetter = options_panel.getUserInfo();
 
 			if (requestBetter!=null) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);
@@ -107,30 +107,31 @@ public class t3t implements EntryPoint {
 				options_panel.getSearchButton().setEnabled(false);
 				results.setHTML("");
 				err_label.setText("");
-				RequestImpl request = formTestRequest();
+//				RequestImpl request = formTestRequest();
 				RequestImpl requestBetter = options_panel.getUserInfo();
 				if (requestBetter!=null) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);
 			}
 		}
 
-		private RequestImpl formTestRequest() {
+//		private RequestImpl formTestRequest() {
 			
-			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-10",
-					"2014-07-15", 2, 4, Country.Turkey);
-			testReq.setMinStars(3);
-			testReq.setMaxStars(4);
-			testReq.setPeopleCount(2);
-			// TODO: ограничить setter'ы, например, нельзя отрицательные числа
-			testReq.setMinPrice(10000);
-			testReq.setMaxPrice(60000);
-
-			// client make request
-			ClientSettingsImpl clientSettings = new ClientSettingsImpl();
-			clientSettings.addSite(Site.teztour);
-			clientSettings.addSite(Site.itour);
-			clientSettings.addSite(Site.nevatravel);
-			
-			return new RequestImpl(testReq, clientSettings); }
+//			
+//			HotelRequestImpl testReq = new HotelRequestImpl("2014-07-10",
+//					"2014-07-15", 2, 4, Country.Turkey);
+//			testReq.setMinStars(3);
+//			testReq.setMaxStars(4);
+//			testReq.setPeopleCount(2);
+//			// TODO: ограничить setter'ы, например, нельзя отрицательные числа
+//			testReq.setMinPrice(10000);
+//			testReq.setMaxPrice(60000);
+//
+//			// client make request
+//			ClientSettingsImpl clientSettings = new ClientSettingsImpl();
+//			clientSettings.addSite(Site.teztour);
+//			clientSettings.addSite(Site.itour);
+//			clientSettings.addSite(Site.nevatravel);
+//			
+//			return new RequestImpl(testReq, clientSettings); }
 		}
 
 		private void sendRequestToServer(RequestImpl request) {

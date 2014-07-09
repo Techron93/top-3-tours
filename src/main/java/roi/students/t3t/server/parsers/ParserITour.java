@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -121,7 +120,7 @@ public class ParserITour implements SiteParser{
 			Date date = new Date();
 			
 			String day = (date.getDate() < 10 ? "0" : "") + date.getDate();
-			String month = (LocalDate.now().getDayOfMonth() < 10 ? "0" : "") + (date.getMonth() + 1);
+			String month = (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1);
 			String url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" + day  + "/" + month +"/" + (date.getYear() + 1900);
 			
 			XmlPage page = webClient.getPage(url);
@@ -142,13 +141,12 @@ public class ParserITour implements SiteParser{
 		return result.doubleValue();
 	}
 	
-	private String formatDate(String oldFormat)
+	private String formatDate(Date date)
 	{
-		String[] temp = oldFormat.split("-");
 		StringBuilder newFormat = new StringBuilder();
-		newFormat.append(temp[2] + ".");
-		newFormat.append(temp[1] + ".");
-		newFormat.append(temp[0]);
+		newFormat.append(date.getDate() + ".");
+		newFormat.append((date.getMonth()+1) + ".");
+		newFormat.append(date.getYear());
 		return newFormat.toString();
 	}
 }

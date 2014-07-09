@@ -1,11 +1,8 @@
 package roi.students.t3t.server.parsers;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +16,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import roi.students.t3t.server.SiteParser;
@@ -191,7 +187,7 @@ public class ParserNeva implements SiteParser {
 		"_-_-_-_-/"+
 		request.getMinDuration()+"/"+
 		request.getMaxDuration()+
-		"/"+ request.getStartDate() +"/"+ request.getFinishDate() +"/"+
+		"/"+ getDateForUrl(request.getStartDate()) +"/"+ getDateForUrl(request.getFinishDate()) +"/"+
 		request.getPeopleCount()+"/0/-/-/"+starsRange+"/"+
 		request.getMinPrice()+"/"+request.getMaxPrice()+"/-/-/-/-/-/search";
 		
@@ -200,6 +196,22 @@ public class ParserNeva implements SiteParser {
 
 	public Site getSite() {
 		return site;
+	}
+	
+	public String getDateForUrl(Date date){		
+		int day = date.getDate();		
+		String day_str;		
+		if(day < 10)		
+			day_str = "0"+day;		
+		else		
+			day_str = Integer.toString(day);		
+		int month = date.getMonth()+1;		
+		String month_str;		
+		if(month < 10)		
+			month_str = "0"+month;		
+		else		
+			month_str = Integer.toString(month);		
+		return day_str+"."+month_str+"."+date.getYear();		
 	}
 
 }
