@@ -34,7 +34,7 @@
 						<g:Label text="От:" ui:field="label_min_duration" />
 					</g:customCell>
 					<g:customCell>
-						<g:TextBox ui:field="textBox_durationFrom" text="1" />
+						<g:TextBox ui:field="textBox_durationFrom" text="3" />
 					</g:customCell>
 				</g:row>
 				<g:row>
@@ -42,7 +42,7 @@
 						<g:Label text="До:" ui:field="label_max_duration" />
 					</g:customCell>
 					<g:customCell>
-						<g:TextBox ui:field="textBox_durationTo" text="10" />
+						<g:TextBox ui:field="textBox_durationTo" text="31" />
 					</g:customCell>
 				</g:row>
 				<g:row>
@@ -79,7 +79,7 @@
 						<g:Label text="Отель:" ui:field="label_hotel" />
 					</g:customCell>
 					<g:customCell>
-						<g:ListBox ui:field="listBox_stars" selectedIndex="2">
+						<g:ListBox ui:field="listBox_stars" selectedIndex="1">
 
 							<g:item value='1'>
 								2*
