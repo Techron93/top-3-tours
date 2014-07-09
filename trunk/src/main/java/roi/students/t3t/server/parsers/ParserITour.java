@@ -1,11 +1,13 @@
 package roi.students.t3t.server.parsers;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -20,6 +22,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import roi.students.t3t.server.SiteParser;
+import roi.students.t3t.shared.TypeFood;
 import roi.students.t3t.shared.dao.HotelInfo;
 import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
@@ -48,6 +51,10 @@ public class ParserITour implements SiteParser{
 			String xmlPage = page.asXml();
 			doc = Jsoup.parse(xmlPage);
 			
+			FileWriter writer = new FileWriter("site.xml");
+			writer.write(xmlPage);
+			writer.close();
+			
 			Elements elements = doc.select("div.tour-group.cfx.ng-scope");
 			for (int i = 0; i < elements.size(); i++)
 			{
@@ -64,8 +71,8 @@ public class ParserITour implements SiteParser{
 				String priceS = "";
 				for (String temp : priceM)
 					priceS += temp;
-				
-				result.add(new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text()), date[0]));
+				if (request.getMinStars() == Integer.parseInt(els_stars.get(0).text()))
+					result.add(new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text()), date[0]));
 			}
 		}
 		catch (MalformedURLException e)
@@ -91,12 +98,12 @@ public class ParserITour implements SiteParser{
 		url.append("&nightsFrom=" + request.getMinDuration());
 		url.append("&nightsTo=" + request.getMaxDuration());
 		url.append("&grade=" + (request.getMinStars() - 1));
-		url.append("&meal=" + request.getTypeFood());
-		url.append("&priceType=1&departureFrom=" + formatDate(request.getStartDate()));
+		url.append("&meal=" + TypeFood.AI.toString());
+		url.append("&priceType=0&departureFrom=" + formatDate(request.getStartDate()));
 		url.append("&departureTo=" + formatDate(request.getFinishDate()));
 		url.append("&priceFrom=" + roundedMinPrice);
 		url.append("&priceTo=" + roundedMaxPrice);
-		url.append("&mealsBetter=false&gradesBetter=false&currencyCode=RUR&bestHotels=20&limit=20");
+		url.append("&mealsBetter=false&gradesBetter=false&currencyCode=RUR&bestHotels=0&limit=60");
 		
 		return url.toString();
 	}
@@ -111,9 +118,11 @@ public class ParserITour implements SiteParser{
 			webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 			webClient.getOptions().setThrowExceptionOnScriptError(false);
 			
-			String day = (LocalDate.now().getDayOfMonth() < 10 ? "0" : "") + LocalDate.now().getDayOfMonth();
-			String month = (LocalDate.now().getDayOfMonth() < 10 ? "0" : "") + LocalDate.now().getMonthValue();
-			String url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" + day  + "/" + month +"/" + LocalDate.now().getYear();
+			Date date = new Date();
+			
+			String day = (date.getDate() < 10 ? "0" : "") + date.getDate();
+			String month = (LocalDate.now().getDayOfMonth() < 10 ? "0" : "") + (date.getMonth() + 1);
+			String url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" + day  + "/" + month +"/" + (date.getYear() + 1900);
 			
 			XmlPage page = webClient.getPage(url);
 	        String pageAsString = page.asXml();
