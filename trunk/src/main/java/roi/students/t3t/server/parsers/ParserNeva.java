@@ -211,7 +211,7 @@ public class ParserNeva implements SiteParser {
 			month_str = "0"+month;		
 		else		
 			month_str = Integer.toString(month);		
-		return day_str+"."+month_str+"."+date.getYear();		
+		return day_str+"."+month_str+"."+(date.getYear()+1900);		
 	}
 
 }
