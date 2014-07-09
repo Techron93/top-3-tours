@@ -53,7 +53,7 @@ public class t3t implements EntryPoint {
 		options_panel = new OptionsPanel();
 		
 
-		RootPanel.get("options_panel").add(options_panel);
+//		RootPanel.get("options_panel").add(options_panel);
 		options_panel.addStyleName("options_panel");
 
 		VerticalPanel results_panel = new VerticalPanel();
