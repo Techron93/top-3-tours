@@ -97,7 +97,7 @@ public class ParserITour implements SiteParser{
 		url.append("&nightsFrom=" + request.getMinDuration());
 		url.append("&nightsTo=" + request.getMaxDuration());
 		url.append("&grade=" + (request.getMinStars() - 1));
-		url.append("&meal=" + TypeFood.AI.toString());
+		url.append("&meal=" + request.getTypeFood());
 		url.append("&priceType=0&departureFrom=" + formatDate(request.getStartDate()));
 		url.append("&departureTo=" + formatDate(request.getFinishDate()));
 		url.append("&priceFrom=" + roundedMinPrice);
