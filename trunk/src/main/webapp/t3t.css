@@ -2,8 +2,8 @@
 
 .search_button {
 	padding: 0px !important;
-	width: 185px;
-	float: left;
+	width: 100%;
+	margin-top: 15%
 }
 
 #label_dates {
@@ -12,9 +12,16 @@
 	font-style: italic;
 }
 
+.title_label {
+	margin-top: 20px;
+	font-style: italic;
+	font-size: medium;
+	float: left;
+}
+
 .row_label {
 	margin-top: 5px;
-	text-align: right;
+	text-align: left;
 	font-size: small;
 }
 

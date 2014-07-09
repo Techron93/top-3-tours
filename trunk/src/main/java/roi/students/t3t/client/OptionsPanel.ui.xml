@@ -8,226 +8,207 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<g:VerticalPanel>
-			<g:Label text="Выберите дату вылета:" ui:field="label_date"/>
-			<g:Grid>
-			<g:row>
-				<g:customCell>
-					<g:Label text="С:" ui:field="label_from"/>
-				</g:customCell>
-				<g:customCell>
-					<p1:DateBox ui:field="dateBox_from"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Label text="По:" ui:field="label_to"/>
-				</g:customCell>
-				<g:customCell>
-					<p1:DateBox ui:field="dateBox_to"/>
-				</g:customCell>
-			</g:row>
-		</g:Grid>
-			<g:Label text="Длительность тура (дней):" ui:field="label_duration"/>
+			<g:Label text="Дата вылета:" ui:field="label_date" />
 			<g:Grid>
 				<g:row>
 					<g:customCell>
-						<g:Label text="От:" ui:field="label_min_duration"/>
+						<g:Label text="С:" ui:field="label_from" />
 					</g:customCell>
 					<g:customCell>
-						<g:TextBox ui:field="textBox_durationFrom" text="1"/>
+						<p1:DateBox ui:field="dateBox_from" />
 					</g:customCell>
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="До:" ui:field="label_max_duration"/>
+						<g:Label text="По:" ui:field="label_to" />
 					</g:customCell>
 					<g:customCell>
-						<g:TextBox ui:field="textBox_durationTo" text="10"/>
+						<p1:DateBox ui:field="dateBox_to" />
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+			<g:Label text="Длительность тура (дней):" ui:field="label_duration" />
+			<g:Grid>
+				<g:row>
+					<g:customCell>
+						<g:Label text="От:" ui:field="label_min_duration" />
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox ui:field="textBox_durationFrom" text="1" />
 					</g:customCell>
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Страна:" ui:field="label_country"/>
+						<g:Label text="До:" ui:field="label_max_duration" />
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox ui:field="textBox_durationTo" text="10" />
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Страна:" ui:field="label_country" />
 					</g:customCell>
 					<g:customCell>
 						<g:ListBox ui:field="listBox_country">
-					<g:item value='0'>
-					Турция
-					</g:item>
-					
-					<g:item value='1'>
-					Египет
-					</g:item>
+							<g:item value='0'>
+								Турция
+							</g:item>
 
-					<g:item value='2'>
-					Кипр
-					</g:item>
+							<g:item value='1'>
+								Египет
+							</g:item>
 
-					<g:item value='3'>
-					Мальдивы
-					</g:item>
+							<g:item value='2'>
+								Кипр
+							</g:item>
 
-					<g:item value='4'>
-					Болгария
-					</g:item>					
-					
-					</g:ListBox>
+							<g:item value='3'>
+								Мальдивы
+							</g:item>
+
+							<g:item value='4'>
+								Болгария
+							</g:item>
+
+						</g:ListBox>
 					</g:customCell>
 				</g:row>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Отель:" ui:field="label_hotel"/>
+						<g:Label text="Отель:" ui:field="label_hotel" />
 					</g:customCell>
 					<g:customCell>
 						<g:ListBox ui:field="listBox_stars" selectedIndex="2">
-	
-					<g:item value='1'>
-					2*
-					</g:item>
-					
-					<g:item value='2'>
-					3*
-					</g:item>
 
-					<g:item value='3'>
-					4*
-					</g:item>
+							<g:item value='1'>
+								2*
+							</g:item>
 
-					<g:item value='4'>
-					5*
-					</g:item>
-					
-					</g:ListBox>
+							<g:item value='2'>
+								3*
+							</g:item>
+
+							<g:item value='3'>
+								4*
+							</g:item>
+
+							<g:item value='4'>
+								5*
+							</g:item>
+
+						</g:ListBox>
 					</g:customCell>
 				</g:row>
 			</g:Grid>
 		</g:VerticalPanel>
 		<g:VerticalPanel>
-			<g:Button ui:field="button_search">Найти</g:Button>
+			<g:Button ui:field="button_search">Начать поиск</g:Button>
 		</g:VerticalPanel>
 		<g:VerticalPanel>
-			<g:DisclosurePanel animationEnabled="true" ui:field="panel_extra_param">
-				<g:header>Дополнительные параметры:</g:header>
-				<g:Grid>
-					<g:row>
-						<g:customCell>
-							<g:Label text="Стоимость:"/>
-						</g:customCell>
-					</g:row>
-					<g:row>
-						<g:customCell>
-							<g:Label text="От:"/>
-						</g:customCell>
-						<g:customCell>
-							<g:TextBox text="10000" textAlignment="ALIGN_CENTER" ui:field="textBox_priceFrom"/>
-						</g:customCell>
-					</g:row>
-					<g:row>
-						<g:customCell>
-							<g:Label text="До:"/>
-						</g:customCell>
-						<g:customCell>
-							<g:TextBox text="100000" textAlignment="ALIGN_CENTER" ui:field="textBox_priceTo"/>
-						</g:customCell>
-					</g:row>
-					<g:row>
-						<g:customCell>
-							<g:Label text="Питание:"/>
-						</g:customCell>
-						<g:customCell>
-							<g:ListBox ui:field="listBox_food">
-							
-						<g:item value='0'>
-							Любое
-						</g:item>
-						
-						<g:item value='1'>
-							UAI
-						</g:item>
-						
-						<g:item value='2'>
-							AI
-						</g:item>
-						
-						<g:item value='3'>
-							FB
-						</g:item>
-						
-						<g:item value='4'>
-							HB
-						</g:item>
-						
-						<g:item value='5'>
-							BB
-						</g:item>
-						
-						<g:item value='6'>
-							Без питания
-						</g:item>	
-						
-										
-					
-					</g:ListBox>
-						</g:customCell>
-					</g:row>
-					<g:row>
-						<g:customCell>
-							<g:Label text="Людей:"/>
-						</g:customCell>
-						<g:customCell>
-							<g:ListBox ui:field="listBox_propleCount" selectedIndex="1">
-												
-						<g:item value='1'>
-							1
-						</g:item>	
-						
-						<g:item value='2'>
-							2
-						</g:item>
-						
-						<g:item value='3'>
-							3
-						</g:item>
-						
-						<g:item value='4'>
-							4
-						</g:item>
-						
-										
-					
-					</g:ListBox>
-						</g:customCell>
-					</g:row>
-					<g:row/>
-				</g:Grid>
-			</g:DisclosurePanel>
-					<g:VerticalPanel>
-					<g:DisclosurePanel animationEnabled="true" ui:field="panel_sites">
-						<g:header>Сайты для анализа:</g:header>
-						<g:Grid>
-							<g:row>
-								<g:customCell>
-									<g:CheckBox text="www.nevatravel.ru" value="true" ui:field="checkBox_nevaTravel"/>
-								</g:customCell>
-							</g:row>
-							<g:row>
-								<g:customCell>
-									<g:CheckBox text="www.itour.ru" value="true" ui:field="checkBox_iTour"/>
-								</g:customCell>
-							</g:row>
-							<g:row>
-								<g:customCell>
-									<g:CheckBox text="something else" value="true" ui:field="checkBox_site3" enabled="false"/>
-								</g:customCell>
-							</g:row>
-						</g:Grid>
-					<!-- 	<g:CheckBox text="iTour" width="5cm" height="4cm"/> -->
-					</g:DisclosurePanel>
-				</g:VerticalPanel>		
-			
+			<g:Grid>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Стоимость:" ui:field="label_price" />
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="От:" ui:field="label_min_price" />
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox text="10000" ui:field="textBox_priceFrom" />
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="До:" ui:field="label_max_price" />
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox text="100000" ui:field="textBox_priceTo" />
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Питание:" ui:field="label_food" />
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="listBox_food">
+							<g:item value='0'>
+								Любое
+							</g:item>
+
+							<g:item value='1'>
+								UAI
+							</g:item>
+
+							<g:item value='2'>
+								AI
+							</g:item>
+
+							<g:item value='3'>
+								FB
+							</g:item>
+
+							<g:item value='4'>
+								HB
+							</g:item>
+
+							<g:item value='5'>
+								BB
+							</g:item>
+
+							<g:item value='6'>
+								Без питания
+							</g:item>
+						</g:ListBox>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Количество людей:" ui:field="label_people_count" />
+					</g:customCell>
+					<g:customCell>
+						<g:ListBox ui:field="listBox_propleCount" selectedIndex="1">
+							<g:item value='1'>
+								1
+							</g:item>
+
+							<g:item value='2'>
+								2
+							</g:item>
+
+							<g:item value='3'>
+								3
+							</g:item>
+
+							<g:item value='4'>
+								4
+							</g:item>
+						</g:ListBox>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Доступные сайты:" ui:field="label_sites" />
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:VerticalPanel ui:field="checkbox_site">
+							<g:CheckBox text="www.nevatravel.ru" value="true"
+								ui:field="checkBox_nevaTravel" />
+							<g:CheckBox text="www.itour.ru" value="true" ui:field="checkBox_iTour" />
+							<g:CheckBox text="something else" value="true"
+								ui:field="checkBox_site3" enabled="false" />
+						</g:VerticalPanel>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+
 		</g:VerticalPanel>
-				<g:VerticalPanel>
-			<g:Label ui:field="Label_res"/>
+		<g:VerticalPanel>
+			<g:Label ui:field="Label_res" />
 		</g:VerticalPanel>
 
 	</g:HTMLPanel>
