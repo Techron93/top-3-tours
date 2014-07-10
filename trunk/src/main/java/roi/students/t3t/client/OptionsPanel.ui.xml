@@ -44,11 +44,7 @@
 						<g:TextBox ui:field="textBox_durationTo" text="31" />
 					</g:customCell>
 				</g:row>
-				<g:row>
-					<g:customCell>
-						<g:IntegerBox/>
-					</g:customCell>
-				</g:row>
+				<g:row/>
 				<g:row>
 					<g:customCell>
 						<g:Label text="Страна:" ui:field="label_country" />
