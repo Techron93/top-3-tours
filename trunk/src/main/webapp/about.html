@@ -1,14 +1,78 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the    -->
+<!-- browser's rendering engine into               -->
+<!-- "Standards Mode". Replacing this declaration  -->
+<!-- with a "Quirks Mode" doctype may lead to some -->
+<!-- differences in layout.                        -->
 
 <html>
- 
 <head>
-	<title>О сервисе </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--                                                               -->
+<!-- Consider inlining CSS to reduce the number of requested files -->
+<!--                                                               -->
+<link type="text/css" rel="stylesheet" href="t3t.css">
+<link type="text/css" rel="stylesheet" href="bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap-theme.min.css">
+<link type="text/css" rel="stylesheet" href="jumbotron-narrow.css">
+
+<!--                                           -->
+<!-- Any title is fine                         -->
+<!--                                           -->
+<title>Рћ СЃРµСЂРІРёСЃРµ</title>
+<br>
+
+<!--                                           -->
+<!-- This script loads your compiled module.   -->
+<!-- If you add any GWT meta tags, they must   -->
+<!-- be added before this line.                -->
+<!--                                           -->
+<script type="text/javascript" language="javascript"
+	src="t3t/t3t.nocache.js"></script>
 </head>
- 
- <body>
-	<p>Данный сервис позволяет подобрать удовлетворяющий Вашему запросу тур. Для этого предлагается выбрать дату начала поездки,
-	   ее продолжительность, бюджет, страну отдыха, звездность отеля, количество отдыхающих, тип питания, а также сайты</p>
-	   турфирм в которых будет производиться подборка туров.
- </body>
- 
+
+<!--                                           -->
+<!-- The body can have arbitrary html, or      -->
+<!-- you can leave the body empty if you want  -->
+<!-- to create a completely dynamic UI.        -->
+<!--                                           -->
+<body>
+
+	<!-- OPTIONAL: include this if you want history support -->
+	<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1'
+		style="position: absolute; width: 0; height: 0; border: 0"></iframe>
+
+	<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+	<noscript>
+		<div
+			style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+			Your web browser must have JavaScript enabled in order for this
+			application to display correctly.</div>
+	</noscript>
+
+	<div class="container">
+		<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li><a href="t3t.html">РџРѕРёСЃРє</a></li>
+				<li class="active"><a href="#">Рћ СЃРµСЂРІРёСЃРµ</a></li>
+				<li><a href="contacts.html">РљРѕРЅС‚Р°РєС‚С‹</a></li>
+			</ul>
+			<h3 class="text-muted">Рћ СЃРµСЂРІРёСЃРµ</h3>
+		</div>
+
+		<div class="container-fluid search_item">
+			<div id="results_panel"></div>
+			<p>Р”Р°РЅРЅС‹Р№ СЃР°Р№С‚ РёРјРµРµС‚ РєРѕР»РѕСЃСЃР°Р»СЊРЅС‹Рµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё, Рѕ РєРѕС‚РѕСЂС‹С… Р±СѓРґРµС‚ РЅР°РїРёСЃР°РЅРѕ РїРѕР·Р¶Рµ! </p>
+		</div>
+		
+		
+		
+		<div class="footer">
+			<p>&copy; Students 2014</p>
+		</div>
+	</div>
+	<!-- container -->
+</body>
 </html>
