@@ -70,8 +70,9 @@ public class ParserITour implements SiteParser{
 				String priceS = "";
 				for (String temp : priceM)
 					priceS += temp;
-				if (request.getMinStars() == Integer.parseInt(els_stars.get(0).text()))
-					result.add(new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text()), date[0]));
+				HotelInfoImpl info = new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text()), date[0]);
+				if (checkInfo(request, info))
+					result.add(info);
 			}
 		}
 		catch (MalformedURLException e)
@@ -150,10 +151,17 @@ public class ParserITour implements SiteParser{
 		return newFormat.toString();
 	}
 	
-	private boolean compareDates(String date1, String date2)
+	private boolean checkInfo(HotelRequest request, HotelInfo info)
 	{
-		
-		return false;
+		if (info.getPrice() < request.getMinPrice() || info.getPrice() > request.getMaxPrice())
+			return false;
+		if (info.getStars() != request.getMinStars())
+			return false;
+		//TODO надо придумать что-то получше
+		String[] date = info.getStartData().split(" ");
+		if (request.getStartDate().getDay() > Integer.parseInt(date[0]))
+			return false;
+		return true;
 	}
 }
 
