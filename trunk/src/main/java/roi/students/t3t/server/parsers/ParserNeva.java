@@ -2,7 +2,9 @@ package roi.students.t3t.server.parsers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,17 +14,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import roi.students.t3t.server.SiteParser;
+import roi.students.t3t.shared.Site;
+import roi.students.t3t.shared.TypeFood;
+import roi.students.t3t.shared.dao.HotelInfo;
+import roi.students.t3t.shared.dao.HotelRequest;
+import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
-import roi.students.t3t.server.SiteParser;
-import roi.students.t3t.shared.Site;
-import roi.students.t3t.shared.dao.HotelInfo;
-import roi.students.t3t.shared.dao.HotelRequest;
-import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
 
 
 public class ParserNeva implements SiteParser {
@@ -34,9 +37,13 @@ public class ParserNeva implements SiteParser {
 	public final static Pattern starsHotelPattern = Pattern.compile("[\\*]+");
 	public final static Pattern urlPattern = Pattern.compile("(/tours/)[\\S]+");
 	public final static Pattern mealPattern = Pattern.compile("\\(\\s\\S\\S\\s\\)");
+	
+	private Calendar calendar;
 
 	
-	public ParserNeva() {}
+	public ParserNeva() {
+		calendar = new GregorianCalendar();
+	}
 
 	 
 	public List<HotelInfo> getList(HotelRequest request) {
@@ -180,7 +187,9 @@ public class ParserNeva implements SiteParser {
 				starsRange+="-"+Integer.toString(i);
 			}
 		}
-		
+		String food = "-";
+		if(request.getTypeFood() != TypeFood.NA)
+			food = request.getTypeFood().toString();
 		String url = 
 	    "http://www.nevatravel.ru/tours/search/spb/"+
 		request.getCountry().nevatravel+
@@ -188,7 +197,7 @@ public class ParserNeva implements SiteParser {
 		request.getMinDuration()+"/"+
 		request.getMaxDuration()+
 		"/"+ getDateForUrl(request.getStartDate()) +"/"+ getDateForUrl(request.getFinishDate()) +"/"+
-		request.getPeopleCount()+"/0/-/-/"+starsRange+"/"+
+		request.getPeopleCount()+"/0/-/"+food+"/"+starsRange+"/"+
 		request.getMinPrice()+"/"+request.getMaxPrice()+"/-/-/-/-/-/search";
 		
 		return url;
@@ -199,19 +208,20 @@ public class ParserNeva implements SiteParser {
 	}
 	
 	public String getDateForUrl(Date date){		
-		int day = date.getDate();		
+		calendar.setTime(date);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);		
 		String day_str;		
 		if(day < 10)		
 			day_str = "0"+day;		
 		else		
 			day_str = Integer.toString(day);		
-		int month = date.getMonth()+1;		
+		int month = calendar.get(Calendar.MONTH)+1;		
 		String month_str;		
 		if(month < 10)		
 			month_str = "0"+month;		
 		else		
 			month_str = Integer.toString(month);		
-		return day_str+"."+month_str+"."+(date.getYear()+1900);		
+		return day_str+"."+month_str+"."+calendar.get(Calendar.YEAR);		
 	}
 
 }
