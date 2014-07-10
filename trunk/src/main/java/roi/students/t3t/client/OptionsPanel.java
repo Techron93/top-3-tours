@@ -325,6 +325,9 @@ public class OptionsPanel extends Composite {
 		RootPanel.get("checkbox_site").add(checkbox_site);
 
 		RootPanel.get("search_button").add(button_search);
+		
+		// debug
+		RootPanel.get("label_res").add(Label_res);
 	}
 
 	private void removeDefaultStyles() {
