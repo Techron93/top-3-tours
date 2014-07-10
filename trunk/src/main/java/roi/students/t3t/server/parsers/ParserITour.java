@@ -64,7 +64,9 @@ public class ParserITour implements SiteParser{
 				String hyperLink = els_link.get(0).attr("abs:href");
 				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
 				Elements els_meal = elements.get(i).select("span.hover-meal.ng-binding");
-				if (els_meal.text() != request.getTypeFood().toString())
+				String  text = els_meal.text();
+				String text1 = request.getTypeFood().toString();
+				if (!text.equals(text1))
 					continue;
 				String day = els_date.text();
 				String[] date = day.split(",");
@@ -151,8 +153,8 @@ public class ParserITour implements SiteParser{
 	{
 		StringBuilder newFormat = new StringBuilder();
 		newFormat.append(date.getDate() + ".");
-		newFormat.append((date.getMonth()+1) + ".");
-		newFormat.append(date.getYear() + 1900);
+		newFormat.append((date.getMonth()) + ".");
+		newFormat.append(date.getYear());
 		return newFormat.toString();
 	}
 	
