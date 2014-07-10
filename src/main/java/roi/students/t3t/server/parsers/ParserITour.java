@@ -63,6 +63,9 @@ public class ParserITour implements SiteParser{
 				Elements els_link= elements.get(i).select("a.btn.btn-xs.btn-green.btn-more");
 				String hyperLink = els_link.get(0).attr("abs:href");
 				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
+				Elements els_meal = elements.get(i).select("span.hover-meal.ng-binding");
+				if (els_meal.text() != request.getTypeFood().toString())
+					continue;
 				String day = els_date.text();
 				String[] date = day.split(",");
 				StringBuilder priceString = new StringBuilder(els_price.get(0).text());
@@ -138,6 +141,8 @@ public class ParserITour implements SiteParser{
 		{e.printStackTrace();}
 		catch (ParseException e)
 		{e.printStackTrace();}
+		catch (NullPointerException e)
+		{result = 34.0;}
 		
 		return result.doubleValue();
 	}
@@ -147,7 +152,7 @@ public class ParserITour implements SiteParser{
 		StringBuilder newFormat = new StringBuilder();
 		newFormat.append(date.getDate() + ".");
 		newFormat.append((date.getMonth()+1) + ".");
-		newFormat.append(date.getYear());
+		newFormat.append(date.getYear() + 1900);
 		return newFormat.toString();
 	}
 	
