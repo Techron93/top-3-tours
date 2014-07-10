@@ -3,7 +3,7 @@
 .search_button {
 	padding: 0px !important;
 	width: 100%;
-	margin-top: 15%
+	margin-top: 20px;
 }
 
 #label_dates {
@@ -12,17 +12,26 @@
 	font-style: italic;
 }
 
+.vspace {
+	margin-top: 30px;
+}
+
 .title_label {
-	margin-top: 20px;
 	font-style: italic;
 	font-size: medium;
 	float: left;
 }
 
 .row_label {
-	margin-top: 5px;
 	text-align: left;
 	font-size: small;
+	float: left;
+	padding: 5px;
+}
+
+.row_input {
+	margin-left: 80px;
+	width: 150px;
 }
 
 .row  {
@@ -30,11 +39,6 @@
 }
 
 .row select {
-	width: 100px;
-	margin-left: 10px;
-}
-
-.row input {
 	width: 100px;
 	margin-left: 10px;
 }
