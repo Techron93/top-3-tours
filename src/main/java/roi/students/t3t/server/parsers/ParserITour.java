@@ -1,12 +1,14 @@
 package roi.students.t3t.server.parsers;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -46,13 +48,9 @@ public class ParserITour implements SiteParser{
 		try
 		{
 			page = webClient.getPage(url);
-			webClient.waitForBackgroundJavaScript(10000);
+			webClient.waitForBackgroundJavaScript(15000);
 			String xmlPage = page.asXml();
 			doc = Jsoup.parse(xmlPage);
-			
-			FileWriter writer = new FileWriter("site.xml");
-			writer.write(xmlPage);
-			writer.close();
 			
 			Elements elements = doc.select("div.tour-group.cfx.ng-scope");
 			for (int i = 0; i < elements.size(); i++)
@@ -64,10 +62,14 @@ public class ParserITour implements SiteParser{
 				String hyperLink = els_link.get(0).attr("abs:href");
 				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
 				Elements els_meal = elements.get(i).select("span.hover-meal.ng-binding");
-				String  text = els_meal.text();
-				String text1 = request.getTypeFood().toString();
-				if (!text.equals(text1))
-					continue;
+				//проверка на валидность типа питания
+				if (request.getTypeFood().toString() != "NA")
+				{
+					String  text = els_meal.text();
+					String text1 = request.getTypeFood().toString();
+					if (!text.equals(text1))
+						continue;
+				}
 				String day = els_date.text();
 				String[] date = day.split(",");
 				StringBuilder priceString = new StringBuilder(els_price.get(0).text());
@@ -84,6 +86,9 @@ public class ParserITour implements SiteParser{
 		{e.printStackTrace();}
 		catch (IOException e)
 		{e.printStackTrace();}
+		catch (ParseException e)
+		{ e.printStackTrace();}
+		
 		return result;
 	}
 
@@ -94,7 +99,27 @@ public class ParserITour implements SiteParser{
 		peopleCount = request.getPeopleCount() != 4 ? (request.getPeopleCount() - 1) : peopleCount;
 		int roundedMinPrice = (int) Math.round(request.getMinPrice() / mesure);
 		int roundedMaxPrice = (int) Math.round(request.getMaxPrice() / mesure);
-		
+		int id = 0;
+		switch(request.getTypeFood().toString()){
+			case "UAI":
+				id = 1;
+				break;
+			case "AI":
+				id = 2;
+				break;
+			case "FB":
+				id = 3;
+				break;
+			case "HB":
+				id = 4;
+				break;
+			case "BB":
+				id = 5;
+				break;
+			case "RO":
+				id = 6;
+				break;
+		}
 		
 		StringBuilder url = new StringBuilder();
 		url.append("http://itour.ru/tour/?city=2&room=" + peopleCount);
@@ -103,7 +128,7 @@ public class ParserITour implements SiteParser{
 		url.append("&nightsFrom=" + request.getMinDuration());
 		url.append("&nightsTo=" + request.getMaxDuration());
 		url.append("&grade=" + (request.getMinStars() - 1));
-		url.append("&meal=" + request.getTypeFood());
+		url.append("&meal=" + id);
 		url.append("&priceType=0&departureFrom=" + formatDate(request.getStartDate()));
 		url.append("&departureTo=" + formatDate(request.getFinishDate()));
 		url.append("&priceFrom=" + roundedMinPrice);
@@ -158,16 +183,27 @@ public class ParserITour implements SiteParser{
 		return newFormat.toString();
 	}
 	
-	private boolean checkInfo(HotelRequest request, HotelInfo info)
+	private boolean checkInfo(HotelRequest request, HotelInfo info) throws ParseException
 	{
+		//проверка на валидность цену отеля
 		if (info.getPrice() < request.getMinPrice() || info.getPrice() > request.getMaxPrice())
 			return false;
+		
+		//проверка количества звезд
 		if (info.getStars() != request.getMinStars())
 			return false;
-		//TODO надо придумать что-то получше
-		String[] date = info.getStartData().split(" ");
-		if (request.getStartDate().getDay() > Integer.parseInt(date[0]))
+		
+		//проверка даты заезда
+		Calendar calendarBegin = new GregorianCalendar(request.getStartDate().getYear(), request.getStartDate().getMonth(), request.getStartDate().getDate());//начальная дата заезда
+		Calendar calendarEnd = new GregorianCalendar(request.getFinishDate().getYear(), request.getFinishDate().getMonth(), request.getFinishDate().getDate());//конечная дата заезда
+		
+		String[] dateS = info.getStartData().split(" ");
+		DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
+		Date date = format.parse(dateS[0] + " " + dateS[1].toLowerCase() + " " + ((new Date()).getYear() + 1900) + " г.");
+		Calendar calendar = new GregorianCalendar(date.getYear() + 1900, date.getMonth() + 1, date.getDate());
+		if (calendar.after(calendarEnd) || calendar.before(calendarBegin))
 			return false;
+		
 		return true;
 	}
 }
