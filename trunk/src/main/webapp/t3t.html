@@ -55,9 +55,9 @@
 	<div class="container">
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="#">Search</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
+				<li class="active"><a href="#">Поиск</a></li>
+				<li><a href="#">О сервисе</a></li>
+				<li><a href="#">Контакты</a></li>
 			</ul>
 			<h3 class="text-muted">Top 3 Tours</h3>
 		</div>
@@ -66,63 +66,80 @@
 			<div class="container-fluid" id="left_panel">
 				<div class="row">
 					<div class="col-md-6">
-						<div class="row">
+						<div class="row vspace">
 							<div id="label_date" class="col-md-12"></div>
 						</div>
 						<div class="row">
-							<div id="label_from" class="col-md-4"></div>
-							<div id="datebox_from" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_from"></div>
+								<div id="datebox_from" class="row_input"></div>
+							</div>
 						</div>
 						<div class="row">
-							<div id="label_to" class="col-md-4"></div>
-							<div id="datebox_to" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_to"></div>
+								<div id="datebox_to" class="row_input"></div>
+							</div>
 						</div>
-						<div class="row">
+						<div class="row vspace">
 							<div id="label_duration" class="col-md-12"></div>
 						</div>
 						<div class="row">
-							<div id="label_min_duration" class="col-md-4"></div>
-							<div id="textbox_min_duration" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_min_duration"></div>
+								<div id="textbox_min_duration" class="row_input"></div>
+							</div>
 						</div>
 						<div class="row">
-							<div id="label_max_duration" class="col-md-4"></div>
-							<div id="textbox_max_duration" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_max_duration"></div>
+								<div id="textbox_max_duration" class="row_input"></div>
+							</div>
 						</div>
 						<div class="row">
-							<div id="label_country" class="col-md-4"></div>
-							<div id="list_country" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_country"></div>
+								<div id="list_country" class="row_input"></div>
+							</div>
 						</div>
 						<div class="row">
-							<div id="label_hotel" class="col-md-4"></div>
-							<div id="list_stars" class="col-md-4"></div>
-						</div>
-						<div class="row">
-							<div id="search_button" class="col-md-12"></div>
+							<div class="col-md-8">
+								<div id="label_hotel"></div>
+								<div id="list_stars" class="row_input"></div>
+							</div>
 						</div>
 					</div>
 					<!-- col-md-6 -->
 
 					<div class="col-md-6">
-						<div class="row">
+						<div class="row vspace">
 							<div id="label_price" class="col-md-12"></div>
 						</div>
 						<div class="row">
-							<div id="label_min_price" class="col-md-4"></div>
-							<div id="textbox_min_price" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_min_price"></div>
+								<div id="textbox_min_price" class="row_input"></div>
+							</div>
 						</div>
 						<div class="row">
-							<div id="label_max_price" class="col-md-4"></div>
-							<div id="textbox_max_price" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_max_price"></div>
+								<div id="textbox_max_price" class="row_input"></div>
+							</div>
+						</div>
+						<div class="row vspace">
+							<div class="col-md-8">
+								<div id="label_food"></div>
+								<div id="list_food" class="row_input"></div>
+							</div>
 						</div>
 						<div class="row">
-							<div id="label_food" class="col-md-4"></div>
-							<div id="list_food" class="col-md-4"></div>
+							<div class="col-md-8">
+								<div id="label_people_count"></div>
+								<div id="list_people_count" class="row_input"></div>
+							</div>
 						</div>
-						<div class="row">
-							<div id="label_people_count" class="col-md-4"></div>
-							<div id="list_people_count" class="col-md-4"></div>
-						</div>
-						<div class="row">
+						<div class="row vspace">
 							<div id="label_sites" class="col-md-12"></div>
 						</div>
 						<div class="row">
@@ -132,6 +149,9 @@
 					<!-- col-md-6 -->
 				</div>
 				<!-- row -->
+				<div class="row">
+					<div id="search_button" class="col-md-6"></div>
+				</div>
 			</div>
 		</div>
 
