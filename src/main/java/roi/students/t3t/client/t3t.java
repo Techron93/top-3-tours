@@ -148,6 +148,9 @@ public class t3t implements EntryPoint {
 			if(requestBetter.getHotelRequest().getMinPrice()>requestBetter.getHotelRequest().getMaxPrice()) { 
 				err_label.setText("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
 			
+			if(requestBetter.getHotelRequest().getMinPrice()==0 && requestBetter.getHotelRequest().getMaxPrice()==0) { 
+				err_label.setText("Халявы.Нет!"); flag_valid = false;} 
+			
 			if (requestBetter!=null && flag_valid==true) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);	
 		}
 

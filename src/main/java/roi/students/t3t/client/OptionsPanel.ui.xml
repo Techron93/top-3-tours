@@ -46,6 +46,11 @@
 				</g:row>
 				<g:row>
 					<g:customCell>
+						<g:IntegerBox/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
 						<g:Label text="Страна:" ui:field="label_country" />
 					</g:customCell>
 					<g:customCell>
