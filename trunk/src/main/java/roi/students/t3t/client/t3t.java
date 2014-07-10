@@ -1,6 +1,8 @@
 package roi.students.t3t.client;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import roi.students.t3t.shared.Country;
 import roi.students.t3t.shared.Site;
@@ -24,6 +26,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 /**
@@ -56,10 +59,11 @@ public class t3t implements EntryPoint {
 		Date today= new Date();
 		
 		options_panel.dateBox_from.setValue(today);
-		Date nextDay = new Date();
 
-		nextDay.setTime(today.getTime() + 1 * 24 * 60 * 60 * 1000 * 3);
-		options_panel.dateBox_to.setValue(nextDay);
+		Date threeDaysLater = new Date(today.getTime());
+		CalendarUtil.addDaysToDate(threeDaysLater, 3);
+		
+		options_panel.dateBox_to.setValue(threeDaysLater);
 
 		options_panel.dateBox_from.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd.MM.yyyy")));
 		options_panel.dateBox_to.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd.MM.yyyy")));
@@ -110,11 +114,11 @@ public class t3t implements EntryPoint {
 			RequestImpl requestBetter = options_panel.getUserInfo();
 			Boolean flag_valid = true;
 			Date today = new Date();
-			Date nextYear = new Date();
-			Date yesterday = new Date();
-			yesterday.setTime(today.getTime() - 1 * 24 * 60 * 60 * 1000);
-			nextYear.setTime(today.getTime() + 1 * 24 * 60 * 60 * 1000 * 365); // wtf am i doing?
+			Date nextYear = new Date(today.getTime());
+			Date yesterday = new Date(today.getTime());
 			
+			CalendarUtil.addDaysToDate(yesterday, -1);
+			CalendarUtil.addDaysToDate(nextYear, 365);
 			
 			// Блок длительности тура
 			if(requestBetter.getHotelRequest().getMinDuration()<3) { 
@@ -155,10 +159,11 @@ public class t3t implements EntryPoint {
 				RequestImpl requestBetter = options_panel.getUserInfo();
 				Boolean flag_valid = true;
 				Date today = new Date();
-				Date nextYear = new Date();
-				Date yesterday = new Date();
-				yesterday.setTime(today.getTime() - 1 * 24 * 60 * 60 * 1000);
-				nextYear.setTime(today.getTime() + 1 * 24 * 60 * 60 * 1000 * 365); // wtf am i doing?
+				Date nextYear = new Date(today.getTime());
+				Date yesterday = new Date(today.getTime());
+				
+				CalendarUtil.addDaysToDate(today, -1);
+				CalendarUtil.addDaysToDate(nextYear, 365);
 				
 				
 				// Блок длительности тура
