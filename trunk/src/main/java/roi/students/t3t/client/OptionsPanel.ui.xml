@@ -210,6 +210,6 @@
 		<g:VerticalPanel>
 			<g:Label ui:field="Label_res" />
 		</g:VerticalPanel>
-
+		<g:HTML ui:field="progress_bar" wordWrap="true"/>
 	</g:HTMLPanel>
 </ui:UiBinder> 

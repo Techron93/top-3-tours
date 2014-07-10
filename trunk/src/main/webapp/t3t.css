@@ -3,7 +3,9 @@
 }
 
 .go_button {
+	margin-top: 10px;
 	width: 99.9999%;
+	color: rgb(255, 255, 255) !important;
 }
 
 .search_item:HOVER {
@@ -26,18 +28,12 @@
     border-radius: 4px 4px 4px 4px;
 }
 
-#label_dates {
-	text-align: left;
-	font-size: small;
-	font-style: italic;
-}
-
 .vspace {
 	margin-top: 30px;
 }
 
 .title_label {
-	font-style: italic;
+	font-style: oblique;
 	font-size: medium;
 	float: left;
 }
@@ -55,7 +51,7 @@
 }
 
 .row  {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .error_label {

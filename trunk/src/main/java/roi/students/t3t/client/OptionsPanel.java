@@ -12,6 +12,7 @@ import roi.students.t3t.shared.dao.impl.RequestImpl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -26,7 +27,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.event.dom.client.KeyPressEvent;
 
 public class OptionsPanel extends Composite {
 
@@ -104,12 +104,21 @@ public class OptionsPanel extends Composite {
 	// buttons
 	@UiField
 	Button button_search;
+	
+	// html
+	@UiField
+	HTML progress_bar;
 
 	interface OptionsPanelUiBinder extends UiBinder<Widget, OptionsPanel> {
 	}
 
 	private HTML err_label;
 
+	/**
+	 * Add error_label to show error msgs.
+	 * 
+	 * @param errLabel
+	 */
 	public void addErrLabel(HTML errLabel) {
 		err_label = errLabel;
 	}
@@ -121,10 +130,11 @@ public class OptionsPanel extends Composite {
 		addNewStylesToElements();
 	}
 
-	public Button getSearchButton() {
-		return button_search;
-	}
-
+	/**
+	 * Forms request to server
+	 * 
+	 * @return request to server.
+	 */
 	public RequestImpl getUserInfo() {
 		Date startDate = dateBox_from.getValue();
 		Date finishDate = dateBox_to.getValue();
@@ -198,33 +208,36 @@ public class OptionsPanel extends Composite {
 				tempFood = TypeFood.NA;
 				break;
 			}
-// Валидация формата входных данных
+			
+			// Валидация формата входных данных
 			int tempMinPrice = -1;
-			try { tempMinPrice = Integer.parseInt(textBox_priceFrom.getValue());
+			try {
+				tempMinPrice = Integer.parseInt(textBox_priceFrom.getValue());
+			} catch (NumberFormatException ex) {
 			}
-			catch (NumberFormatException ex) {}
 
 			int tempMaxPrice = -2;
-			try { tempMaxPrice = Integer.parseInt(textBox_priceTo.getValue());
+			try {
+				tempMaxPrice = Integer.parseInt(textBox_priceTo.getValue());
+			} catch (NumberFormatException ex) {
 			}
-			catch  (NumberFormatException ex) {}
-			
 
-			int tempPeopleCount = listBox_propleCount.getSelectedIndex()+1;
-			
+			int tempPeopleCount = listBox_propleCount.getSelectedIndex() + 1;
+
 			int tempDurationFrom = -1;
 			try {
-			tempDurationFrom = Integer.parseInt(textBox_durationFrom.getValue());
+				tempDurationFrom = Integer.parseInt(textBox_durationFrom
+						.getValue());
+			} catch (NumberFormatException ex) {
 			}
-			catch (NumberFormatException ex) {}
-			
+
 			int tempDurationTo = -2;
-			try{
-			tempDurationTo = Integer.parseInt(textBox_durationTo.getValue());
+			try {
+				tempDurationTo = Integer
+						.parseInt(textBox_durationTo.getValue());
+			} catch (NumberFormatException ex) {
 			}
-			catch (NumberFormatException ex) {}
-			
-			
+
 			// HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom,
 			// tempDateTo, tempStars, tempStars, tempCountry);
 
@@ -258,6 +271,10 @@ public class OptionsPanel extends Composite {
 		}
 	}
 
+	/**
+	 * Search button handler. Shows debug messages.
+	 * @param event
+	 */
 	@UiHandler("button_search")
 	void onButton_searchClick(ClickEvent event) {
 
@@ -327,6 +344,8 @@ public class OptionsPanel extends Composite {
 		RootPanel.get("checkbox_site").add(checkbox_site);
 
 		RootPanel.get("search_button").add(button_search);
+
+		RootPanel.get("progress_bar").add(progress_bar);
 		
 		// debug
 		RootPanel.get("label_res").add(Label_res);
@@ -390,35 +409,45 @@ public class OptionsPanel extends Composite {
 		checkBox_site3.addStyleName("checkbox-inline");
 
 		button_search.addStyleName("btn btn-primary search_button");
+		
+		progress_bar.addStyleName("progress");
+		progress_bar.setHTML(
+				"<div class=\"progress-bar progress-bar-striped active\"  "
+				+ "role=\"progressbar\" aria-valuenow=\"45\" aria-valuemin=\"0\" "
+				+ "aria-valuemax=\"100\" style=\"width: 100%\">"
+				+ "<span class=\"sr-only\"></span>"
+				+ "</div></div>" );
+		progress_bar.setVisible(false);
 	}
 
 	@UiHandler("textBox_durationFrom")
 	void onTextBox_durationFromKeyPress(KeyPressEvent event) {
-		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+		if (!"0123456789".contains(String.valueOf(event.getCharCode()))) {
 			textBox_durationFrom.cancelKey();
 		}
 	}
+
 	@UiHandler("textBox_durationTo")
 	void onTextBox_durationToKeyPress(KeyPressEvent event) {
-		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+		if (!"0123456789".contains(String.valueOf(event.getCharCode()))) {
 			textBox_durationTo.cancelKey();
 		}
-		
+
 	}
+
 	@UiHandler("textBox_priceFrom")
 	void onTextBox_priceFromKeyPress(KeyPressEvent event) {
-		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+		if (!"0123456789".contains(String.valueOf(event.getCharCode()))) {
 			textBox_priceFrom.cancelKey();
 		}
 	}
-	
-	
+
 	@UiHandler("textBox_priceTo")
 	void onTextBox_priceToKeyPress(KeyPressEvent event) {
-		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+		if (!"0123456789".contains(String.valueOf(event.getCharCode()))) {
 			textBox_priceTo.cancelKey();
 		}
-		
+
 	}
-	
+
 }
