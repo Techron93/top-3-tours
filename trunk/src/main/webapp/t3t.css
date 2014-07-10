@@ -2,6 +2,10 @@
 	width: 100%;
 }
 
+.go_button {
+	width: 99.9999%;
+}
+
 .search_item:HOVER {
 	background-color: rgb(230, 230, 230);
 }
@@ -14,7 +18,7 @@
     border-radius: 4px 4px 4px 4px;
 }
 
-.options_panel {
+.panel_item {
     padding: 9px 14px;
     margin-bottom: 14px;
     background-color: rgb(247, 247, 249);
@@ -54,7 +58,8 @@
 	margin-bottom: 10px;
 }
 
-.row select {
-	width: 100px;
-	margin-left: 10px;
+.error_label {
+	font-style: normal;
+	color: red;
+	text-align: left;
 }

@@ -18,6 +18,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -107,9 +108,9 @@ public class OptionsPanel extends Composite {
 	interface OptionsPanelUiBinder extends UiBinder<Widget, OptionsPanel> {
 	}
 
-	private Label err_label;
+	private HTML err_label;
 
-	public void addErrLabel(Label errLabel) {
+	public void addErrLabel(HTML errLabel) {
 		err_label = errLabel;
 	}
 
@@ -128,7 +129,7 @@ public class OptionsPanel extends Composite {
 		Date startDate = dateBox_from.getValue();
 		Date finishDate = dateBox_to.getValue();
 		if (startDate == null || finishDate == null) {
-			err_label.setText("Введите правильную дату");
+			err_label.setHTML("Введите правильную дату");
 
 			return null;
 		} else {
