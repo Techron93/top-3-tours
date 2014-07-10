@@ -47,8 +47,8 @@ public class t3t implements EntryPoint {
 //	private final Messages messages = GWT.create(Messages.class);
 
 	private HTML results;
-	private Button testButton;
-	private Label err_label;
+//	private Button testButton;
+	private HTML err_label;
 	private OptionsPanel options_panel;
 	/**
 	 * This is the entry point method.
@@ -73,24 +73,27 @@ public class t3t implements EntryPoint {
 //		RootPanel.get("options_panel").add(options_panel);
 		options_panel.addStyleName("options_panel");
 
-		VerticalPanel results_panel = new VerticalPanel();
-		RootPanel.get("results_panel").add(results_panel);
-		results_panel.addStyleName("results_panel");
+//		VerticalPanel results_panel = new VerticalPanel();
+//		RootPanel.get("results_panel").add(results_panel);
+//		results_panel.addStyleName("row");
 
 //		Label rlabel = new Label(messages.rlabel());
-		Label rlabel = new Label("Результат:");
-		results_panel.add(rlabel);
+//		Label rlabel = new Label("Результат:");
+//		results_panel.add(rlabel);
 		
 		
 	//	err_label = new Label(messages.err_label());
-		err_label = new Label();
+		err_label = new HTML();
 		options_panel.addErrLabel(err_label);
-		err_label.addStyleName("err_label");
-		results_panel.add(err_label);
+		RootPanel.get("error_label").add(err_label);
+		err_label.addStyleName("error_label");
+//		results_panel.add(err_label);
 		
 		//results = new HTML(messages.htmlNewHtml_html(), true);
 		results = new HTML();
-		results_panel.add(results);
+		RootPanel.get("results_panel").add(results);
+		results.addStyleName("row");
+//		results_panel.add(results);
 
 //		testButton = new Button(messages.testButton());
 //		RootPanel.get("test_button").add(testButton);
@@ -110,7 +113,7 @@ public class t3t implements EntryPoint {
 			// Request request = options_panel.getUserInput();
 			options_panel.getSearchButton().setEnabled(false);
 			results.setHTML("");
-			err_label.setText("");
+			err_label.setHTML("");
 			RequestImpl requestBetter = options_panel.getUserInfo();
 			Boolean flag_valid = true;
 			Date today = new Date();
@@ -122,31 +125,31 @@ public class t3t implements EntryPoint {
 			
 			// Блок длительности тура
 			if(requestBetter.getHotelRequest().getMinDuration()<3) { 
-				err_label.setText("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
+				err_label.setHTML("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
 			if(requestBetter.getHotelRequest().getMaxDuration()<0 || requestBetter.getHotelRequest().getMaxDuration()>31) { 
-				err_label.setText("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
+				err_label.setHTML("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
 			if(requestBetter.getHotelRequest().getMinDuration()>requestBetter.getHotelRequest().getMaxDuration()) { 
-				err_label.setText("Выберите правильную длительность тура!"); flag_valid = false;} 
+				err_label.setHTML("Выберите правильную длительность тура!"); flag_valid = false;} 
 			if(requestBetter.getHotelRequest().getStartDate().after(requestBetter.getHotelRequest().getFinishDate()))  { 
-				err_label.setText("Выберите правильную дату вылета!"); flag_valid = false;}
+				err_label.setHTML("Выберите правильную дату вылета!"); flag_valid = false;}
 			
 			// Блок даты вылета
 //			if(requestBetter.getHotelRequest().getFinishDate().after(nextYear))  { 
 //				err_label.setText("Выберите правильную дату вылета! (менее года (до))"); flag_valid = false;}
 			
 			if(requestBetter.getHotelRequest().getStartDate().after(nextYear))  { 
-				err_label.setText("Выберите правильную дату вылета! (менее года (от))"); flag_valid = false;}
+				err_label.setHTML("Выберите правильную дату вылета! (менее года (от))"); flag_valid = false;}
 			
 			if(requestBetter.getHotelRequest().getStartDate().before(yesterday))  { 
-				err_label.setText("Выберите правильную дату вылета (не ранее чем сегодня)"); flag_valid = false;}
+				err_label.setHTML("Выберите правильную дату вылета (не ранее чем сегодня)"); flag_valid = false;}
 			
 			// Блок цены
 			if(requestBetter.getHotelRequest().getMinPrice()<0) { 
-				err_label.setText("Выберите правильный диапазон цен (от<0) или ошибка формата"); flag_valid = false;} 
+				err_label.setHTML("Выберите правильный диапазон цен (от<0) или ошибка формата"); flag_valid = false;} 
 			if(requestBetter.getHotelRequest().getMaxPrice()<0) { 
-				err_label.setText("Выберите правильный диапазон цен (до<0) или ошибка формата"); flag_valid = false;} 
+				err_label.setHTML("Выберите правильный диапазон цен (до<0) или ошибка формата"); flag_valid = false;} 
 			if(requestBetter.getHotelRequest().getMinPrice()>requestBetter.getHotelRequest().getMaxPrice()) { 
-				err_label.setText("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
+				err_label.setHTML("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
 			
 			if(requestBetter.getHotelRequest().getMinPrice()==0 && requestBetter.getHotelRequest().getMaxPrice()==0) { 
 				err_label.setText("Халявы.Нет!"); flag_valid = false;} 
@@ -158,7 +161,7 @@ public class t3t implements EntryPoint {
 			if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 				options_panel.getSearchButton().setEnabled(false);
 				results.setHTML("");
-				err_label.setText("");
+				err_label.setHTML("");
 				RequestImpl requestBetter = options_panel.getUserInfo();
 				Boolean flag_valid = true;
 				Date today = new Date();
@@ -171,31 +174,31 @@ public class t3t implements EntryPoint {
 				
 				// Блок длительности тура
 				if(requestBetter.getHotelRequest().getMinDuration()<3) { 
-					err_label.setText("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
+					err_label.setHTML("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
 				if(requestBetter.getHotelRequest().getMaxDuration()<0 || requestBetter.getHotelRequest().getMaxDuration()>31) { 
-					err_label.setText("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
+					err_label.setHTML("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
 				if(requestBetter.getHotelRequest().getMinDuration()>requestBetter.getHotelRequest().getMaxDuration()) { 
-					err_label.setText("Выберите правильную длительность тура!"); flag_valid = false;} 
+					err_label.setHTML("Выберите правильную длительность тура!"); flag_valid = false;} 
 				if(requestBetter.getHotelRequest().getStartDate().after(requestBetter.getHotelRequest().getFinishDate()))  { 
-					err_label.setText("Выберите правильную дату вылета!"); flag_valid = false;}
+					err_label.setHTML("Выберите правильную дату вылета!"); flag_valid = false;}
 				
 				// Блок даты вылета
 //				if(requestBetter.getHotelRequest().getFinishDate().after(nextYear))  { 
 //					err_label.setText("Выберите правильную дату вылета! (менее года (до))"); flag_valid = false;}
 				
 				if(requestBetter.getHotelRequest().getStartDate().after(nextYear))  { 
-					err_label.setText("Выберите правильную дату вылета! (менее года (от))"); flag_valid = false;}
+					err_label.setHTML("Выберите правильную дату вылета! (менее года (от))"); flag_valid = false;}
 				
 				if(requestBetter.getHotelRequest().getStartDate().before(yesterday))  { 
-					err_label.setText("Выберите правильную дату вылета (не ранее чем сегодня)"); flag_valid = false;}
+					err_label.setHTML("Выберите правильную дату вылета (не ранее чем сегодня)"); flag_valid = false;}
 				
 				// Блок цены
 				if(requestBetter.getHotelRequest().getMinPrice()<0) { 
-					err_label.setText("Выберите правильный диапазон цен (от<0) или ошибка формата"); flag_valid = false;} 
+					err_label.setHTML("Выберите правильный диапазон цен (от<0) или ошибка формата"); flag_valid = false;} 
 				if(requestBetter.getHotelRequest().getMaxPrice()<0) { 
-					err_label.setText("Выберите правильный диапазон цен (до<0) или ошибка формата"); flag_valid = false;} 
+					err_label.setHTML("Выберите правильный диапазон цен (до<0) или ошибка формата"); flag_valid = false;} 
 				if(requestBetter.getHotelRequest().getMinPrice()>requestBetter.getHotelRequest().getMaxPrice()) { 
-					err_label.setText("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
+					err_label.setHTML("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
 				
 				if (requestBetter!=null && flag_valid==true) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);	
 				
@@ -234,14 +237,18 @@ public class t3t implements EntryPoint {
 								result = result.concat("<b>По вашему запросу ничего не найдено</b>");
 							else
 								for (HotelInfo elem : arg0.getHotelInfo()) {
-									result = result.concat("<b>Цена: </b> "
-											+ elem.getPrice() + "<br>"
-											+ "<b>Звезды: </b> " + elem.getStars()
-											+ "<br>" + "<b>Сайт: </b> "
-											+ "<a href=\"" + elem.getURL() + "\">" + elem.getURL() + "</a>"
-											+ "<br>" + elem.getName()
-											+ "<br>" + "<b>Дата вылета: </b>" + elem.getStartData() 
-											+ "<br><br>");
+									result = result
+											+ "<div class=\"col-md-4\">"
+											+ "<div class=\"search_item\">"
+											+ "<b>Цена:</b> " + elem.getPrice()
+											+ "<br><b>Звезды:</b> " + elem.getStars()
+											+ "<br><b>Название отеля:</b><br>" + elem.getName()
+											+ "<br><b>Дата вылета:</b><br>" + elem.getStartData()
+											+ "</div>"
+											+ "<a href=\"" + elem.getURL()
+											+ "\" class=\"btn btn-success btn-sm go_button\" role=\"button\">Перейти</a>"
+											+ "</div>"
+											;
 								}
 							results.setHTML(result);
 							options_panel.getSearchButton().setEnabled(true);
@@ -249,10 +256,9 @@ public class t3t implements EntryPoint {
 
 						@Override
 						public void onFailure(Throwable arg0) {
-							String result = "\n error: \n" + arg0.getClass() 
-									+ "\n" + arg0.getMessage()
-									+ "\n" + arg0.getCause();
-							err_label.setText(SERVER_ERROR + result);
+							String result = "<br>" + arg0.getMessage();
+									
+							err_label.setHTML(SERVER_ERROR + result);
 							options_panel.getSearchButton().setEnabled(true);
 						}
 					});

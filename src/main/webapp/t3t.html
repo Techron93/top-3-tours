@@ -22,7 +22,6 @@
 <!-- Any title is fine                         -->
 <!--                                           -->
 <title>Top 3 Tours</title>
-<br>
 
 <!--                                           -->
 <!-- This script loads your compiled module.   -->
@@ -62,11 +61,14 @@
 			<h3 class="text-muted">Top 3 Tours</h3>
 		</div>
 
-		<div class="options_panel">
+		<div class="panel_item">
 			<div class="container-fluid" id="left_panel">
 				<div class="row">
+					<div id="error_label" class="col-md-12"></div>
+				</div>
+				<div class="row">
 					<div class="col-md-6">
-						<div class="row vspace">
+						<div class="row">
 							<div id="label_date" class="col-md-12"></div>
 						</div>
 						<div class="row">
@@ -112,7 +114,7 @@
 					<!-- col-md-6 -->
 
 					<div class="col-md-6">
-						<div class="row vspace">
+						<div class="row">
 							<div id="label_price" class="col-md-12"></div>
 						</div>
 						<div class="row">
@@ -157,9 +159,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid search_item">
-			<div id="results_panel"></div>
-		</div>
+		<div class="container-fluid panel_item" id="results_panel"></div>
 		<div class="footer">
 			<p>&copy; Students 2014</p>
 		</div>
