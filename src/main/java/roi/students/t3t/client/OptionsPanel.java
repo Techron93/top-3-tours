@@ -391,4 +391,33 @@ public class OptionsPanel extends Composite {
 		button_search.addStyleName("btn btn-primary search_button");
 	}
 
+	@UiHandler("textBox_durationFrom")
+	void onTextBox_durationFromKeyPress(KeyPressEvent event) {
+		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+			textBox_durationFrom.cancelKey();
+		}
+	}
+	@UiHandler("textBox_durationTo")
+	void onTextBox_durationToKeyPress(KeyPressEvent event) {
+		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+			textBox_durationTo.cancelKey();
+		}
+		
+	}
+	@UiHandler("textBox_priceFrom")
+	void onTextBox_priceFromKeyPress(KeyPressEvent event) {
+		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+			textBox_priceFrom.cancelKey();
+		}
+	}
+	
+	
+	@UiHandler("textBox_priceTo")
+	void onTextBox_priceToKeyPress(KeyPressEvent event) {
+		if(!"0123456789".contains(String.valueOf(event.getCharCode()))) {
+			textBox_priceTo.cancelKey();
+		}
+		
+	}
+	
 }
