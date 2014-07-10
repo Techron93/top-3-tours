@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.event.dom.client.KeyPressEvent;
 
 public class OptionsPanel extends Composite {
 
@@ -389,4 +390,5 @@ public class OptionsPanel extends Composite {
 
 		button_search.addStyleName("btn btn-primary search_button");
 	}
+
 }
