@@ -104,17 +104,15 @@ public class t3t implements EntryPoint {
 
 		public void onClick(ClickEvent event) {
 			// Request request = options_panel.getUserInput();
-//			options_panel.getSearchButton().setEnabled(false);
+			options_panel.getSearchButton().setEnabled(false);
 			results.setHTML("");
 			err_label.setText("");
-//			RequestImpl request = formTestRequest();
 			RequestImpl requestBetter = options_panel.getUserInfo();
 			Boolean flag_valid = true;
 			Date today = new Date();
 			Date nextYear = new Date();
-			Date tomorrow = new Date();
-			tomorrow.setTime(today.getTime() - 1 * 24 * 60 * 60 * 1000);
-			
+			Date yesterday = new Date();
+			yesterday.setTime(today.getTime() - 1 * 24 * 60 * 60 * 1000);
 			nextYear.setTime(today.getTime() + 1 * 24 * 60 * 60 * 1000 * 365); // wtf am i doing?
 			
 			
@@ -135,7 +133,7 @@ public class t3t implements EntryPoint {
 			if(requestBetter.getHotelRequest().getStartDate().after(nextYear))  { 
 				err_label.setText("Выберите правильную дату вылета! (менее года (от))"); flag_valid = false;}
 			
-			if(requestBetter.getHotelRequest().getStartDate().before(tomorrow))  { 
+			if(requestBetter.getHotelRequest().getStartDate().before(yesterday))  { 
 				err_label.setText("Выберите правильную дату вылета (не ранее чем сегодня)"); flag_valid = false;}
 			
 			// Блок цены
@@ -146,26 +144,53 @@ public class t3t implements EntryPoint {
 			if(requestBetter.getHotelRequest().getMinPrice()>requestBetter.getHotelRequest().getMaxPrice()) { 
 				err_label.setText("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
 			
-			
-			
-			
-			// 
-			if (requestBetter!=null && flag_valid==true) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);
-
-
-
-			
+			if (requestBetter!=null && flag_valid==true) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);	
 		}
 
 		public void onKeyUp(KeyUpEvent event) {
 			if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-				// Request request = options_panel.getUserInput();
 				options_panel.getSearchButton().setEnabled(false);
 				results.setHTML("");
 				err_label.setText("");
-//				RequestImpl request = formTestRequest();
 				RequestImpl requestBetter = options_panel.getUserInfo();
-				if (requestBetter!=null) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);
+				Boolean flag_valid = true;
+				Date today = new Date();
+				Date nextYear = new Date();
+				Date yesterday = new Date();
+				yesterday.setTime(today.getTime() - 1 * 24 * 60 * 60 * 1000);
+				nextYear.setTime(today.getTime() + 1 * 24 * 60 * 60 * 1000 * 365); // wtf am i doing?
+				
+				
+				// Блок длительности тура
+				if(requestBetter.getHotelRequest().getMinDuration()<3) { 
+					err_label.setText("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
+				if(requestBetter.getHotelRequest().getMaxDuration()<0 || requestBetter.getHotelRequest().getMaxDuration()>31) { 
+					err_label.setText("Выберите правильную длительность тура (от 3 до 31)"); flag_valid = false;} 
+				if(requestBetter.getHotelRequest().getMinDuration()>requestBetter.getHotelRequest().getMaxDuration()) { 
+					err_label.setText("Выберите правильную длительность тура!"); flag_valid = false;} 
+				if(requestBetter.getHotelRequest().getStartDate().after(requestBetter.getHotelRequest().getFinishDate()))  { 
+					err_label.setText("Выберите правильную дату вылета!"); flag_valid = false;}
+				
+				// Блок даты вылета
+//				if(requestBetter.getHotelRequest().getFinishDate().after(nextYear))  { 
+//					err_label.setText("Выберите правильную дату вылета! (менее года (до))"); flag_valid = false;}
+				
+				if(requestBetter.getHotelRequest().getStartDate().after(nextYear))  { 
+					err_label.setText("Выберите правильную дату вылета! (менее года (от))"); flag_valid = false;}
+				
+				if(requestBetter.getHotelRequest().getStartDate().before(yesterday))  { 
+					err_label.setText("Выберите правильную дату вылета (не ранее чем сегодня)"); flag_valid = false;}
+				
+				// Блок цены
+				if(requestBetter.getHotelRequest().getMinPrice()<0) { 
+					err_label.setText("Выберите правильный диапазон цен (от<0) или ошибка формата"); flag_valid = false;} 
+				if(requestBetter.getHotelRequest().getMaxPrice()<0) { 
+					err_label.setText("Выберите правильный диапазон цен (до<0) или ошибка формата"); flag_valid = false;} 
+				if(requestBetter.getHotelRequest().getMinPrice()>requestBetter.getHotelRequest().getMaxPrice()) { 
+					err_label.setText("Выберите правильный диапазон цен (от < до)"); flag_valid = false;} 
+				
+				if (requestBetter!=null && flag_valid==true) sendRequestToServer(requestBetter); else options_panel.getSearchButton().setEnabled(true);	
+				
 			}
 		}
 
@@ -201,9 +226,9 @@ public class t3t implements EntryPoint {
 								result = result.concat("<b>По вашему запросу ничего не найдено</b>");
 							else
 								for (HotelInfo elem : arg0.getHotelInfo()) {
-									result = result.concat("<b>Цена: </b> = "
+									result = result.concat("<b>Цена: </b> "
 											+ elem.getPrice() + "<br>"
-											+ "<b>Звезды: </b> = " + elem.getStars()
+											+ "<b>Звезды: </b> " + elem.getStars()
 											+ "<br>" + "<b>Сайт: </b> "
 											+ "<a href=\"" + elem.getURL() + "\">" + elem.getURL() + "</a>"
 											+ "<br>" + elem.getName()

@@ -200,12 +200,12 @@ public class OptionsPanel extends Composite {
 			int tempMinPrice = -1;
 			try { tempMinPrice = Integer.parseInt(textBox_priceFrom.getValue());
 			}
-			catch (NumberFormatException ex) {err_label.setText("Ошибка! Неверный формат данных."); }
+			catch (NumberFormatException ex) {}
 
 			int tempMaxPrice = -2;
 			try { tempMaxPrice = Integer.parseInt(textBox_priceTo.getValue());
 			}
-			catch  (NumberFormatException ex) {err_label.setText("Ошибка! Неверный формат данных."); }
+			catch  (NumberFormatException ex) {}
 			
 
 			int tempPeopleCount = listBox_propleCount.getSelectedIndex()+1;
@@ -214,13 +214,13 @@ public class OptionsPanel extends Composite {
 			try {
 			tempDurationFrom = Integer.parseInt(textBox_durationFrom.getValue());
 			}
-			catch (NumberFormatException ex) {err_label.setText("Ошибка! ваолптловда"); }
+			catch (NumberFormatException ex) {}
 			
 			int tempDurationTo = -2;
 			try{
 			tempDurationTo = Integer.parseInt(textBox_durationTo.getValue());
 			}
-			catch (NumberFormatException ex) {err_label.setText("Ошибка! Неверный формат данных."); }
+			catch (NumberFormatException ex) {}
 			
 			
 			// HotelRequestImpl testReq = new HotelRequestImpl(tempDateFrom,
