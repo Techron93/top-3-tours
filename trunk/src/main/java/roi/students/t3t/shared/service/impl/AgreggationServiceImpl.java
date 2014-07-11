@@ -52,45 +52,39 @@ public class AgreggationServiceImpl implements AgreggationService {
 		 * @Override public List<HotelInfo> call() throws Exception { //TODO:
 		 * here must be method from third parser return null; } };
 		 */
-
-		ArrayList<HotelInfo> result = new ArrayList<HotelInfo>();
-
-		// ArrayList<Future<List<HotelInfo>>> resultsAsync = new
-		// ArrayList<Future<List<HotelInfo>>>();
-		// List<HotelInfo> parserResults = new ArrayList<HotelInfo>();
-	 Set<Site> siteSet = request.getClientSettings().getSiteList();
-		// ExecutorService exec = Executors.newCachedThreadPool();
+		ArrayList<Future<List<HotelInfo>>> resultsAsync = new
+		ArrayList<Future<List<HotelInfo>>>();
+		List<HotelInfo> result = new ArrayList<HotelInfo>();
+		Set<Site> siteSet = request.getClientSettings().getSiteList();
+		ExecutorService exec = Executors.newCachedThreadPool();
 		for (Site site : siteSet) {
 			switch (site) {
 			case itour:
-				result.addAll(itourParser.getList(hotelRequest));
+				resultsAsync.add(exec.submit(callable1));
 				break;
-			//	resultsAsync.add(exec.submit(callable1));
 			case teztour:
 				// MockTezTourParser tezTourParser = new MockTezTourParser();
 				// parserResults.addAll(tezTourParser.getList(hotelRequest));
 				break;
 			case nevatravel:
-				result.addAll(nevaTravelParser.getList(hotelRequest));
-				
-				//resultsAsync.add(exec.submit(callable2));
+				resultsAsync.add(exec.submit(callable2));
 				break;
 			default:
 				break;
 			}
 		}
-	/*	exec.shutdown();
+		exec.shutdown();
 
 		for (Future<List<HotelInfo>> info : resultsAsync)
 			try {
-				parserResults.addAll(info.get());
+				result.addAll(info.get());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 		return new ServerResponseImpl(
 				AgreggationServiceSuit.getThreeBest(result), request);
 	}
