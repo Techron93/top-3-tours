@@ -60,10 +60,11 @@ public class ParserITour implements SiteParser{
 			for (int i = 0; i < 5; i++)
 			{
 				page = webClient.getPage(url);
-				webClient.waitForBackgroundJavaScript(15000);
+				webClient.waitForBackgroundJavaScript(20000);
 				String xmlPage = page.asXml();
 				doc = Jsoup.parse(xmlPage);
 				elements = doc.select("div.tour-group.cfx.ng-scope");
+				logger.error("elements.size() = " + elements.size());
 				if (elements.size() != 0)
 					break;
 			}
@@ -77,13 +78,13 @@ public class ParserITour implements SiteParser{
 				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
 				Elements els_meal = elements.get(i).select("span.hover-meal.ng-binding");
 				//проверка на валидность типа питания
-				if (request.getTypeFood().toString().equals("NA"))
+				/*if (request.getTypeFood().toString().equals("NA"))
 				{
 					String  text = els_meal.text();
 					String text1 = request.getTypeFood().toString();
 					if (!text.equals(text1))
 						continue;
-				}
+				}*/
 				String day = els_date.text();
 				String[] date = day.split(",");
 				StringBuilder priceString = new StringBuilder(els_price.get(0).text());
@@ -128,23 +129,23 @@ public class ParserITour implements SiteParser{
 		int roundedMinPrice = (int) Math.round(request.getMinPrice() / mesure);
 		int roundedMaxPrice = (int) Math.round(request.getMaxPrice() / mesure);
 		int id = 0;
-		switch(request.getTypeFood().toString()){
-			case "UAI":
+		switch(request.getTypeFood()){
+			case UAI:
 				id = 1;
 				break;
-			case "AI":
+			case AI:
 				id = 2;
 				break;
-			case "FB":
+			case FB:
 				id = 3;
 				break;
-			case "HB":
+			case HB:
 				id = 4;
 				break;
-			case "BB":
+			case BB:
 				id = 5;
 				break;
-			case "RO":
+			case RO:
 				id = 6;
 				break;
 		}
@@ -226,23 +227,23 @@ public class ParserITour implements SiteParser{
 	private boolean checkInfo(HotelRequest request, HotelInfo info) throws ParseException
 	{
 		//проверка на валидность цену отеля
-		if (info.getPrice() < request.getMinPrice() || info.getPrice() > request.getMaxPrice())
+		/*if (info.getPrice() < request.getMinPrice() || info.getPrice() > request.getMaxPrice())
 			return false;
 		
 		//проверка количества звезд
 		if (info.getStars() != request.getMinStars())
-			return false;
+			return false;*/
 		
 		//проверка даты заезда
-		Calendar calendarBegin = new GregorianCalendar(request.getStartDate().getYear(), request.getStartDate().getMonth(), request.getStartDate().getDate());//начальная дата заезда
-		Calendar calendarEnd = new GregorianCalendar(request.getFinishDate().getYear(), request.getFinishDate().getMonth(), request.getFinishDate().getDate());//конечная дата заезда
+		//Calendar calendarBegin = new GregorianCalendar(request.getStartDate().getYear(), request.getStartDate().getMonth(), request.getStartDate().getDate());//начальная дата заезда
+		//Calendar calendarEnd = new GregorianCalendar(request.getFinishDate().getYear(), request.getFinishDate().getMonth(), request.getFinishDate().getDate());//конечная дата заезда
 		
-		String[] dateS = info.getStartData().split(" ");
+		/*String[] dateS = info.getStartData().split(" ");
 		DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
 		Date date = format.parse(dateS[0] + " " + dateS[1].toLowerCase() + " " + ((new Date()).getYear()) + " г.");
 		Calendar calendar = new GregorianCalendar(date.getYear(), date.getMonth() + 1, date.getDate());
 		if (calendar.before(calendarBegin))
-			return false;
+			return false;*/
 		return true;
 	}
 }
