@@ -97,11 +97,14 @@ public class ParserNeva implements SiteParser {
 				stars = starsStr.length();
 				cleanHotelName = hotelName.substring(0, hotelName.indexOf('*')).trim();
 				
+				if(stars > request.getMaxStars() || stars < request.getMinStars())
+					continue;
+				
 				String sityName = hotel.select("div[class=tourInfo itemView]").get(0).select("div").get(2).text();
 				
 				String priseStr = hotel.select("div[class=bookingInfo itemView]").text();
 				int cleanPrise = stringPriсeToInt(priseStr);
-				if(cleanPrise == -1)
+				if(cleanPrise == -1 || cleanPrise > request.getMaxPrice() || cleanPrise < request.getMinPrice())
 					continue;
 				
 				String dirtyData = hotel.select("div[class=dateT floatleft]").text();
@@ -118,11 +121,14 @@ public class ParserNeva implements SiteParser {
 				String cleanMeal = null;		
 		        Matcher matcherMeal = mealPattern.matcher(dirtyMeal);	
 				if (matcherMeal.find()) {
-					cleanMeal = matcherMeal.group(0).toString().replaceAll("\\( | \\)", "");
+					cleanMeal = matcherMeal.group(0).toString().replaceAll("\\( | \\)", "").trim();
 		        }	else {
 		        	//TODO need logging 
 		        	continue; 
 		        }
+				
+				if(cleanMeal != request.getTypeFood().toString())
+					continue;
 				
 				
 				String dirtyUrl = hotel.select("div[class=tourTitle]").get(0).toString();
