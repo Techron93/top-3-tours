@@ -98,8 +98,6 @@ public class OptionsPanel extends Composite {
 	CheckBox checkBox_nevaTravel;
 	@UiField
 	CheckBox checkBox_iTour;
-	@UiField
-	CheckBox checkBox_site3;
 
 	// buttons
 	@UiField
@@ -348,7 +346,7 @@ public class OptionsPanel extends Composite {
 		RootPanel.get("progress_bar").add(progress_bar);
 		
 		// debug
-		RootPanel.get("label_res").add(Label_res);
+//		RootPanel.get("label_res").add(Label_res);
 	}
 
 	private void removeDefaultStyles() {
@@ -368,7 +366,7 @@ public class OptionsPanel extends Composite {
 
 		checkBox_nevaTravel.removeStyleName("gwt-CheckBox");
 		checkBox_iTour.removeStyleName("gwt-CheckBox");
-		checkBox_site3.removeStyleName("gwt-CheckBox");
+//		checkBox_site3.removeStyleName("gwt-CheckBox");
 
 		button_search.removeStyleName("gwt-Button");
 	}
@@ -406,7 +404,7 @@ public class OptionsPanel extends Composite {
 
 		checkBox_nevaTravel.addStyleName("checkbox-inline");
 		checkBox_iTour.addStyleName("checkbox-inline");
-		checkBox_site3.addStyleName("checkbox-inline");
+//		checkBox_site3.addStyleName("checkbox-inline");
 
 		button_search.addStyleName("btn btn-primary search_button");
 		

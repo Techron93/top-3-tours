@@ -109,7 +109,7 @@
 			<g:Grid>
 				<g:row>
 					<g:customCell>
-						<g:Label text="Стоимость:" ui:field="label_price" />
+						<g:Label text="Стоимость (в рублях):" ui:field="label_price" />
 					</g:customCell>
 				</g:row>
 				<g:row>
@@ -199,8 +199,6 @@
 							<g:CheckBox text="www.nevatravel.ru" value="true"
 								ui:field="checkBox_nevaTravel" />
 							<g:CheckBox text="www.itour.ru" value="true" ui:field="checkBox_iTour" />
-							<g:CheckBox text="something else" value="true"
-								ui:field="checkBox_site3" enabled="false" />
 						</g:VerticalPanel>
 					</g:customCell>
 				</g:row>

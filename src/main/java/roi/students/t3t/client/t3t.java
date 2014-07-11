@@ -126,7 +126,7 @@ public class t3t implements EntryPoint {
 		}
 		if (requestBetter.getHotelRequest().getMinDuration() > requestBetter
 				.getHotelRequest().getMaxDuration()) {
-			err_label.setHTML("Выберите правильную длительность тура!");
+			err_label.setHTML("Выберите правильную длительность тура (от 3 до 31)");
 			flag_valid = false;
 		}
 		if (requestBetter.getHotelRequest().getStartDate()
@@ -143,7 +143,7 @@ public class t3t implements EntryPoint {
 
 		if (requestBetter.getHotelRequest().getStartDate().after(nextYear)) {
 			err_label
-					.setHTML("Выберите правильную дату вылета! (менее года (от))");
+					.setHTML("Выберите правильную дату вылета!");
 			flag_valid = false;
 		}
 
@@ -157,17 +157,17 @@ public class t3t implements EntryPoint {
 		// Блок цены
 		if (requestBetter.getHotelRequest().getMinPrice() < 0) {
 			err_label
-					.setHTML("Выберите правильный диапазон цен (от<0) или ошибка формата");
+					.setHTML("Выберите правильный диапазон цен");
 			flag_valid = false;
 		}
 		if (requestBetter.getHotelRequest().getMaxPrice() < 0) {
 			err_label
-					.setHTML("Выберите правильный диапазон цен (до<0) или ошибка формата");
+					.setHTML("Выберите правильный диапазон цен");
 			flag_valid = false;
 		}
 		if (requestBetter.getHotelRequest().getMinPrice() > requestBetter
 				.getHotelRequest().getMaxPrice()) {
-			err_label.setHTML("Выберите правильный диапазон цен (от < до)");
+			err_label.setHTML("Выберите правильный диапазон цен");
 			flag_valid = false;
 		}
 
