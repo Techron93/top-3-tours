@@ -56,18 +56,11 @@ public class ParserITour implements SiteParser{
 		Document doc = null;
 		try
 		{
-			Elements elements = null;
-			for (int i = 0; i < 5; i++)
-			{
-				page = webClient.getPage(url);
-				webClient.waitForBackgroundJavaScript(20000);
-				String xmlPage = page.asXml();
-				doc = Jsoup.parse(xmlPage);
-				elements = doc.select("div.tour-group.cfx.ng-scope");
-				logger.error("elements.size() = " + elements.size());
-				if (elements.size() != 0)
-					break;
-			}
+			page = webClient.getPage(url);
+			webClient.waitForBackgroundJavaScript(20000);
+			String xmlPage = page.asXml();
+			doc = Jsoup.parse(xmlPage);
+			Elements elements = doc.select("div.tour-group.cfx.ng-scope");
 			for (int i = 0; i < elements.size(); i++)
 			{
 				Elements els_name = elements.get(i).select("div.name.ng-scope");
