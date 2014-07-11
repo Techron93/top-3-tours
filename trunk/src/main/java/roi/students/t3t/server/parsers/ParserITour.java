@@ -78,13 +78,13 @@ public class ParserITour implements SiteParser{
 				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
 				Elements els_meal = elements.get(i).select("span.hover-meal.ng-binding");
 				//проверка на валидность типа питания
-				if (request.getTypeFood().toString().equals("NA"))
+				/*if (request.getTypeFood().toString().equals("NA"))
 				{
 					String  text = els_meal.text();
 					String text1 = request.getTypeFood().toString();
 					if (!text.equals(text1))
 						continue;
-				}
+				}*/
 				String day = els_date.text();
 				String[] date = day.split(",");
 				StringBuilder priceString = new StringBuilder(els_price.get(0).text());
