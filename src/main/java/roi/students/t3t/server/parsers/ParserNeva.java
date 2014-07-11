@@ -54,7 +54,7 @@ public class ParserNeva implements SiteParser {
 	 
 	public List<HotelInfo> getList(HotelRequest request) {
 		
-		
+		logger.debug("\n\nMethod getList:");
 		
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
 		webClient.getOptions().setJavaScriptEnabled(true);
@@ -97,6 +97,10 @@ public class ParserNeva implements SiteParser {
 				stars = starsStr.length();
 				cleanHotelName = hotelName.substring(0, hotelName.indexOf('*')).trim();
 				
+				logger.debug("Stars : " + stars);
+				logger.debug("Min stars : " + request.getMinStars());
+				logger.debug("Max stars : " + request.getMaxStars());
+				
 				if(stars > request.getMaxStars() || stars < request.getMinStars())
 					continue;
 				
@@ -127,9 +131,13 @@ public class ParserNeva implements SiteParser {
 		        	continue; 
 		        }
 				
-				if(cleanMeal != request.getTypeFood().toString())
+				logger.debug("Food : " + cleanMeal);
+				logger.debug("Request food :" + request.getTypeFood().toString());
+				
+				if(!cleanMeal.equals(request.getTypeFood().toString()))
 					continue;
 				
+				logger.debug("SUPER FOOD");
 				
 				String dirtyUrl = hotel.select("div[class=tourTitle]").get(0).toString();
 				String cleanUrl = null;
@@ -192,8 +200,7 @@ public class ParserNeva implements SiteParser {
  */
 	public String buildUrl(HotelRequest request) {
 		
-		logger.error("Hello! It's my ERROR LOG");
-		System.out.println("SYSOUT");
+		logger.debug("BUILD URL");
 		
 		String starsRange;
 		

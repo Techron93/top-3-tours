@@ -50,20 +50,20 @@ public class ParserNeva2Test {
 		request.setCountry(Country.Turkey);
 		request.setTypeFood(TypeFood.AI);
 
-		ParserITour parser2 = new ParserITour();
+//		ParserITour parser2 = new ParserITour();
 		ParserNeva parser = new ParserNeva();
 		
-		String url = parser.buildUrl(request);
-		url = parser2.buildUrl(request);
-		System.out.println(url);
+//		String url = parser.buildUrl(request);
+//		url = parser2.buildUrl(request);
+//		System.out.println(url);
 		
-//		List<HotelInfo> list = parser.getList(request);
-//		
-//		System.out.println(parser.buildUrl(request));
-//		
-//		for(HotelInfo hotel : list){
-//			System.out.println(hotel);
-//		}
+		List<HotelInfo> list = parser.getList(request);
+		
+		System.out.println(parser.buildUrl(request));
+		
+		for(HotelInfo hotel : list){
+			System.out.println(hotel);
+		}
 		
 		assertTrue(Boolean.TRUE);
 		
