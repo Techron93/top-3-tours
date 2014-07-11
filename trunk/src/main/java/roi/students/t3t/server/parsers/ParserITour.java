@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,6 +30,13 @@ import roi.students.t3t.shared.dao.HotelRequest;
 import roi.students.t3t.shared.dao.impl.HotelInfoImpl;
 
 public class ParserITour implements SiteParser{
+	
+	
+	
+	private static Logger logger =
+            Logger.getLogger("itourLogger");
+	
+	
 	
 	public ParserITour()
 	{}
@@ -94,7 +102,13 @@ public class ParserITour implements SiteParser{
 
 	public String buildUrl(HotelRequest request){
 		
+		logger.error("Hello! ITOUR ERROR LOG");
+		
 		double mesure = getBaxPrice();
+		
+		
+		
+		
 		int peopleCount = 4;
 		peopleCount = request.getPeopleCount() != 4 ? (request.getPeopleCount() - 1) : peopleCount;
 		int roundedMinPrice = (int) Math.round(request.getMinPrice() / mesure);
