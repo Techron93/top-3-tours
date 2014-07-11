@@ -6,9 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
@@ -40,6 +44,8 @@ public class ParserNeva implements SiteParser {
 	
 	private Calendar calendar;
 
+	 private static Logger logger =
+	            Logger.getLogger("nevaLogger");
 	
 	public ParserNeva() {
 		calendar = new GregorianCalendar();
@@ -48,12 +54,16 @@ public class ParserNeva implements SiteParser {
 	 
 	public List<HotelInfo> getList(HotelRequest request) {
 		
+		
+		
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
 		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
 		webClient.getOptions().setThrowExceptionOnScriptError(true);
 		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
 		
+		
+
 		
 		List<HotelInfo> result = new ArrayList<HotelInfo>();
 		
@@ -175,6 +185,9 @@ public class ParserNeva implements SiteParser {
  * Формирует url запрос для сайта www.nevatravel.ru по полученному (HotelRequest).
  */
 	public String buildUrl(HotelRequest request) {
+		
+		logger.error("Hello! It's my ERROR LOG");
+		System.out.println("SYSOUT");
 		
 		String starsRange;
 		
