@@ -1,5 +1,6 @@
 package roi.students.t3t.server.parsers;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
@@ -42,7 +43,7 @@ public class ParserITour implements SiteParser{
 	{}
 
 	public List<HotelInfo> getList(HotelRequest request) {
-		
+				
 		String url = buildUrl(request);
 		List<HotelInfo> result = new ArrayList<HotelInfo>(0);
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
@@ -55,12 +56,17 @@ public class ParserITour implements SiteParser{
 		Document doc = null;
 		try
 		{
-			page = webClient.getPage(url);
-			webClient.waitForBackgroundJavaScript(15000);
-			String xmlPage = page.asXml();
-			doc = Jsoup.parse(xmlPage);
-			
-			Elements elements = doc.select("div.tour-group.cfx.ng-scope");
+			Elements elements = null;
+			for (int i = 0; i < 5; i++)
+			{
+				page = webClient.getPage(url);
+				webClient.waitForBackgroundJavaScript(15000);
+				String xmlPage = page.asXml();
+				doc = Jsoup.parse(xmlPage);
+				elements = doc.select("div.tour-group.cfx.ng-scope");
+				if (elements.size() != 0)
+					break;
+			}
 			for (int i = 0; i < elements.size(); i++)
 			{
 				Elements els_name = elements.get(i).select("div.name.ng-scope");
@@ -71,7 +77,7 @@ public class ParserITour implements SiteParser{
 				Elements els_date = elements.get(i).select("span.hover-departure-date.ng-binding");
 				Elements els_meal = elements.get(i).select("span.hover-meal.ng-binding");
 				//проверка на валидность типа питания
-				if (request.getTypeFood().toString() != "NA")
+				if (request.getTypeFood().toString().equals("NA"))
 				{
 					String  text = els_meal.text();
 					String text1 = request.getTypeFood().toString();
@@ -86,9 +92,17 @@ public class ParserITour implements SiteParser{
 				for (String temp : priceM)
 					priceS += temp;
 				HotelInfoImpl info = new HotelInfoImpl(hyperLink, Integer.parseInt(priceS), els_name.get(0).text(), Integer.parseInt(els_stars.get(0).text()), date[0]);
+				
 				if (checkInfo(request, info))
 					result.add(info);
 			}
+			
+			FileWriter temp = new FileWriter("temp.txt");
+			for (int i = 0; i < result.size(); i++)
+			{
+				temp.write(result.get(i).getName());
+			}
+			temp.close();
 		}
 		catch (MalformedURLException e)
 		{e.printStackTrace();}
@@ -135,19 +149,29 @@ public class ParserITour implements SiteParser{
 				break;
 		}
 		
+		int duration = request.getMaxDuration() > 30 ? 30 : request.getMaxDuration();
+		
 		StringBuilder url = new StringBuilder();
 		url.append("http://itour.ru/tour/?city=2&room=" + peopleCount);
-		url.append("&childAges[]=14&childAges[]=14&arrivalCountry=" + request.getCountry().itour);
+		url.append("&childAges%5B%5D=14&childAges%5B%5D=14&arrivalCountry=" + request.getCountry().itour);
 		url.append("&arrivalCountryCode=" + request.getCountry().idITour);
 		url.append("&nightsFrom=" + request.getMinDuration());
-		url.append("&nightsTo=" + request.getMaxDuration());
+		url.append("&nightsTo=" + duration);
 		url.append("&grade=" + (request.getMinStars() - 1));
 		url.append("&meal=" + id);
 		url.append("&priceType=0&departureFrom=" + formatDate(request.getStartDate()));
 		url.append("&departureTo=" + formatDate(request.getFinishDate()));
 		url.append("&priceFrom=" + roundedMinPrice);
 		url.append("&priceTo=" + roundedMaxPrice);
-		url.append("&mealsBetter=false&gradesBetter=false&currencyCode=RUR&bestHotels=0&limit=60");
+		url.append("&mealsBetter=false&gradesBetter=false&currencyCode=RUR&bestHotels=0&limit=20");
+		
+		try{
+		FileWriter writer = new FileWriter("url.txt");
+		writer.write(url.toString());
+		writer.close();
+		}
+		catch (IOException e)
+		{e.printStackTrace();}
 		
 		return url.toString();
 	}
@@ -190,10 +214,12 @@ public class ParserITour implements SiteParser{
 	
 	private String formatDate(Date date)
 	{
+		int year = date.getYear() + 1900;
+		int month = date.getMonth() + 1;
 		StringBuilder newFormat = new StringBuilder();
 		newFormat.append(date.getDate() + ".");
-		newFormat.append((date.getMonth()) + ".");
-		newFormat.append(date.getYear());
+		newFormat.append((month + "."));
+		newFormat.append(year);
 		return newFormat.toString();
 	}
 	
@@ -213,11 +239,10 @@ public class ParserITour implements SiteParser{
 		
 		String[] dateS = info.getStartData().split(" ");
 		DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
-		Date date = format.parse(dateS[0] + " " + dateS[1].toLowerCase() + " " + ((new Date()).getYear() + 1900) + " г.");
-		Calendar calendar = new GregorianCalendar(date.getYear() + 1900, date.getMonth() + 1, date.getDate());
-		if (calendar.after(calendarEnd) || calendar.before(calendarBegin))
+		Date date = format.parse(dateS[0] + " " + dateS[1].toLowerCase() + " " + ((new Date()).getYear()) + " г.");
+		Calendar calendar = new GregorianCalendar(date.getYear(), date.getMonth() + 1, date.getDate());
+		if (calendar.before(calendarBegin))
 			return false;
-		
 		return true;
 	}
 }
